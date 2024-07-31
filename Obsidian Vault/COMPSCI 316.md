@@ -266,4 +266,72 @@ Sample Question GDPR
 			- ![[Pasted image 20240731185738.png]]'![[Pasted image 20240731185810.png]]
 	- Usage control (UCON)
 	-  Policy-Based Access Control (PBAC)
+
+
+## Lecture 6
+
+-  Malware
+	- Malware is a set of instructions that run on your computer and make your system do something that an attacker wants it to do.
+	- A bad program that aims at compromising CIA of the data, applications or system.
+	- Malware Types
+		- Virus
+			- An executable or script that replicates itself
+		- Worm
+			- A computer program that can run independently and propagate itself over the network
+			- Exploit vulnerabilities
+		- Trojan Horse
+			- It appears to have a useful function but also has a hidden and potentially malicious function
+		- Spyware
+			- Software that collects information from and transmits it to another system
+			- E.g monitoring keystrokes network traffic or sensitive information
+		- Ransomware
+			- Stealing data and asking money to get it back
+			- Victims are individuals and organisations
+		- Botnets (robot and network)
+			- Receive commands from remote Command and Control C&C servers
+			- E.g. used for Distributed DoS (DDoS)
+		- Document Based Malware
+			- ![[Pasted image 20240801021242.png]]
+			- How does document-based malware work?
+				- The malware embeds malicious codes into documents, PDFs, spreadsheets, and other files
+				- Once on your computer, it can perform various malicious tasks:
+					- such as stealing passwords or infecting your email contacts
+				- The malware replaces ordinary commands with malicious code
+				- The worst part is that you can activate the malware through normal day-to-day tasks such as opening your emails or editing Word documents
+				- Document-based malware overrides your commands, altering your computer, causing damage and further spreading the malicious code.
+				- Often, the malware tampers with word processors by adding, deleting, and changing words within your documents
+				- Further, it moves texts, adds images, and corrupts your hard drive.
+				- In addition, it can infiltrate your email, sending unsolicited emails to your contact list. Unsuspecting recipients will open your emails in good faith, spreading the virus into their computers.
+				- Archive and script files are also a common method for distributing attachment-based malware.
+		- Advanced Persistent Threat (APT)
+			- Advanced
+				- Using a wide variety of intrusion technologies and malware
+			- Persistent
+				- Applied persistently and effectively to specific targets
+				- Runs over an extended period
+			- Often attributed to state-sponsored organisations
+			- Example
+				- Stuxnet, designed by US and Israeli intelligence to disable Iranian nuclear system
+		- Zero-Day and backdoor
+			- Zero-day vulnerability (exploit)
+				- An unknown flaw that is discovered but does not have a patch or other fix (0-day to prepare a patch)
+				- It can be exploited by cybercriminals
+			- Backdoor
+				- Any mechanism that bypasses a normal security beck
+				- It may allow unauthorised access to data or program functionalities
+		- Social Engineering
+			- Psychological manipulation to trick users into doing security mistakes or giving away sensitive information
+		- Phishing is the most popular type
+			- Email and text message aimed at creating a sense of urgency, curiosity or fear in victims
+			- Tricks users into
+				- Revealing sensitive information
+				- Clicking on links to malicious websites
+				- Opening attachments that contain malware
+- Malware Countermeasures
+	- Use anti-virus, phishing detection systems, blacklisting IPs, firewalls, malware detection.
+	- Patch your machine
+	- Detect and prevent
+		- Intrusion detection System (IDS)
+		- Intrusion Prevention System (IPS)
+	- Educate Users
 		
