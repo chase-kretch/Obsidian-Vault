@@ -1,0 +1,111 @@
+
+### Lecture 04 Virtual Machines 2
+
+- Virtualisation Implementation
+	- Generally difficult to make a exact duplicate of a machine
+		- Especially if only dual mode on CPU
+		- CPU features and support for VMMs (Virtual Machine Manager), it is getting easier
+	- Most VMMs implement virtual CPU to represent states of each VM
+		- When guest context switched onto CPU by manager, information from VCPU is loaded and storage
+- Trap and Emulate
+	- Dual mode CPU: virtual machine guest executes in usermode
+	- Just as the physical machine has two modes, so much the VM
+		- VM needs two modes, V usermode and V Kernel mode, both run in real user mode
+	- Actions in guest that usually cause switch to kernel mode must cause switch to VKM
+	- Attempting priviledge instruction in user mode causes and error (trap)
+	- VMM gains control, checks error, and executes operation as attempted by guest (emulate)
+	- Return control to guest in user mode
+	- User mode code in guest runs at same speed as if not a guest
+		- Kernel mode code instead runs slower due to trap and emulate
+		- Especially when multiple guests are running, (each need trap and emulate)
+	 - Now that there is support for VMMs, CPUs tend to do this far better.
+- Virtualization Problems
+	- Some cpus dont have clean separation between privileged and nonprivileged instructions
+		- Earlier x86 CPUs
+		- x86 popf
+			- Load CPU flags register from contents of the stack
+			- If CPU in privileged mode, all flags replaced
+			- If user mode, only some are replaced
+			- No trap generated
+	- Special Instructions caused:
+		- Until 1998, trap-emulate was considered impossible
+		- **Binary Translation** solves this
+			- If guest VCPU is in usermode, guest can run instructions natively.
+			- If kernel mode,
+				- VMM examines every instruction guest is about to execute by reading ahead
+				- Non special instructions run natively
+				- Special instructions translated at runtime into new instructions that do equivalent task
+		- Not slow because
+			- Translation is simple
+			- Only translates code that is ran
+			- Much is the same as original
+			- Cached and reused
+			- Other tricks
+	- **Memory Management**
+		- Another challenge.
+		- How can a VMM keep page table state for both guests believing they control the page and VMM that controls the tables
+		- Commonly used **nested page tables (NPTs)**
+			- For trap and emulated and binary translation.
+			- Each guest maintains page tables to translate virtual to physical address
+			- VMM maintains per guest NPT to represt guest page table
+			- Just as VPU stores guest CPU state
+			- When guest CPU, VMM makes the guests NPT the active page table
+			- Causes TLB misses, slow performance
+	- **Hardware**
+		- All virtualisation needs some HW support
+		- Intel added VT-x AMD AMD-V (2005 2006)
+			- CPUs with this dont need binary translation
+			- Defines more CPU modes, guest host
+		- HW support for NPT, DMA and interrupts.
+- **More VM styles**
+	- Application Containment (OS Level Virtualisation)
+		- Good for servers (use same OS)
+		- Containers look like servers, they can be rebooted separately, have their own ip, root, programs, but use **same kernel**.
+	- Paravirtualisation
+		- Xen - requires modifying OS source code to use xen layer, guest knows it is running off a host.
+	- Application Virtualisation
+		- Application runs on a layer which provides resources it needs even though it may be running on a different OS. Wine for running programs from old windows on a newer one. (Wine is not an emulator)
+	- Programming-Environment Virtualisation
+		- Java Vm, CLR/MONO
+		- Implement different architecture on top of hardware /OS
+	- Windows Subsystem for Linux 
+
+## Lecture 05 Systems Programming Language
+
+- C is the language of choice for majority of OS.
+	- High level assembler, can do low level things such as accessing and modifying memory.
+	- Also is portable (can be used on different architectures)
+	- ![[Pasted image 20240729012552.png]]
+- Accessing Registers
+	- You can use the register storage class specifier to say that a variable should be kept in the register e.g
+		- register long number = 1234
+	- However this doesnt guarantee that the value is stored in the register, it depends on how many available registers there are
+	- Also, compilers are good at optimising register usage and it isnt a good idea for a programmer to manually do this
+	- memory mapped registers can be accessed directly using pointer manipulation
+- Volatile
+	- Volatile is a type qualifier
+		- volatile unsigned char *reg
+		- This means the variable may change in a non local way, or that the compiler has no way of knowing whether the value has changed or not between references
+		- Compiler is not allowed to optimise accesses. Ever read must go back to the main store to retrieve the current value
+			- memory mapped device registers
+			- values modified in interrupt routines
+			- values modified in another thread
+- Memory Management
+	- All local variables disappear when functions are returned
+		- Space is allocated on the stack for the variables in each function invocation
+		- There is a limit to stack size soft limites asnd hard limits. 
+	- Areas of static memory
+		- Global Variables
+		- Static variables
+		- If in a function it maintains its value even when the function is returned. Where is the variable actually stored?
+	- The advantage of static memory is that it is allocated at compile time and hence has no allocation overhead at ruin time.
+	- The disadvantage is that it cannot easily be released.
+- Dynamic Memory
+	- C requires explicit control of dynamic memory
+		- This is suitable for OS programming as there is no garbage collection available
+		- garbage collection adds a layer of complexity and unpredictability to the programming environment
+		- this is important in small systems such as embedded systems (or phones)
+		- especially important in real-time syustems
+		- malloc or callic
+		- free(thread)
+	- 

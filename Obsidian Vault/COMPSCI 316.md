@@ -1,0 +1,269 @@
+## Lecture 3
+
+General Data Protection Regulation **GDPR**
+
+- EU DPD Data Protection Directive
+	- Component of EU privacy and human rights
+	- Deals with protection and processing of personal data
+	- does not protect personal data of EU citizens outside of the EU
+	
+- GDPR Replaces DPD **SUMMARY**
+	- Legally protects citizens even out of EU
+	- Photos, audio, video, transactions, social media,
+	- Device identifiers (IP, IMEI)
+	- Browsing History
+	- and Genetic Info
+	- Harmonises Data privacy laws across EU
+	- Protects citizens
+	- Reshapes the way organisations approach privacy
+
+- Data Definition
+	- Personal Data
+		- Any info related to you, ID, Gender, Address
+	- De-Identified Data
+		- Personal data without the identifiers
+		- E.g anon post in facebook group
+	- Anonymized Data
+		- Personal data where it is impossible to re-identify
+		- E.G Average age of first home buyers.
+
+- Common Terms
+	- Data subject
+		- Any person whose personal data is being collected, held or processed, e.g US
+	- Data Controller
+		- An entity that determines the purposes of this data
+		- E.G UoA
+	- Data Processor
+		- The entity that handles the personal data on behalf of the controllers
+		- Google
+
+- GDPR Principles
+	- Lawfullness fairness and transparency
+	- Purpose limitations
+		- Must not be used in ways unknown to the client
+	- Data minimisation
+		- States that only data directly relevant to a specified purpose can be collected
+	- Accuracy
+		- Data gathered from clients must be stored correctly and updated regularly
+	- Confidentiality and Integrity
+		- Confidentiality
+			- Only those with requisite and authorisation can retrieve data
+		- Integrity
+			- Retreived data can only be altered by the person authorised to.
+	- Accountability
+		- Requires you to take responsibility with what you do with personal data and how you comply with the other principles
+
+GDPR Changes
+- Increased territorail scope
+	- GDPR applies to all data processing companys with EU data subjects
+	- GDPR applies to data controllers 
+- Penalties
+	- An organisation breaching GDPR can be fined up to 4% of their global turnover or 20 Million.
+	- This is the maximum fine for the most serious infringements
+		- E.g not having consumer consent.
+
+- Consent
+	- Must be given in a easily accessible form.
+		- With the purpose of data processing attached in the consent
+	- Must be obtained using clear and plain language
+	- Can easily withdraw
+
+- Breach Notification
+	- Mandatory to notify where databreach is likely to result in a risk for the rights and freedoms of people.
+	- Must be done within 72 hours of beoming aware of the breach
+	- Data controllers and processors are required to notify their customers
+- Right to Access
+	- A confirmation from data controllers
+		- Tells you whether or not personal data is being processed, where and for what purpose
+	- The controller shall provide a copy of personal data
+		- Free of charge and in electronic format
+	- Dramatic shift from DPD to data trnasparency and empowerment to subjects
+- Right to be Forgotten
+	- Also known as data erasure
+	- It entitles data subjects to have the data controller erase their data
+	- This right requires controllers to check the public interest in the availability of the data
+- Data portability
+	- The right of subjects to receive personal data that have been provided to a data controller
+	- In a structured way, commonly used and machine readable.
+	- Subjects have the right to request the data to transmit their data to another controller
+	- Only applies for personal data not anonymous
+- Privacy by Design
+	- Inclusion of data protection from the early stages of system design
+		- rather than an addition
+	- The controller shall implement data protection through design
+	- The controller can hold and process only the data necessary for the completion of its duties 
+		- Data minimisation
+Sample Question GDPR
+![[Pasted image 20240725022040.png]]
+
+## Lecture 4
+
+- Identification and Authentication
+	- Identification
+		- The process in which a system entity provides its claimed identity e.g UPI
+	- Authentication
+		- The process of verifying an identity claimed by a system entity, e.g password
+
+- Password Vulnerabilities
+	- Offline Dictionary Attack
+		- Through strong access control, attackers can gain access to password files (hash values)
+		- Comparing password hashes against hashes of commonly used passwords e.g iLoveYou. 
+		- Countermeasures
+			- Prevent unauthorised access to password files.
+				- Intrusion detections measures to identify a compromise
+			- Rapid reissuance of passwords
+	- Specific Account Attack
+		- Attacker targets a specific account
+		- Submits password guesses until successful
+		- Countermeasures
+			- Lockout
+			- Progressive delay after each try
+	- Popular password Attack
+		- Users tend to choose easily remembered passwords
+		- This makes them easy to guess
+		- Attacks can try commonly used passwords against a wide range of user IDs.
+		- Countermeasures
+			- Enforcing complex password policies
+			- Scanning IP addresses and client cookies for submission patterns e.g dynamic password policies (policies for each individual person)
+			- Intrusion detection
+	- Password guessing against a single user
+		- Gaining knowledge about an individual user
+		- Knowing system password policies
+		- Difference is they know you as a person and have more information about you than a regular hacker
+		- Using both to guess a password
+		- Countermeasures
+			- Educating users
+			- Enforcing complex password policies
+	- Workstation hijacking
+		- The attacker waits until a logged-in workstation is unattended
+		- Countermeasures
+			- Logging out after a certain period of inactivity
+			- Intrusion detection schemes can be used to detect changes in user behaviour
+	- Exploiting User Mistakes
+		- Users are likely to write down the system assignment passwords
+		- The fundamental issue is those passwords might be difficult to remember
+		- Attackers can use social engineering tricks that trick the user into revealing a password
+		- Many systems are shipped with default passwords for admins
+		- Countermeasures
+			- Changing default passwords
+			- Educating users
+	- Exploiting Same Password use
+		- User s intend to choose the same password for different services
+		- Attackers can learn password from one source
+		- They can try the same password for other services that might be used by the user
+		- Countermeasure
+			- Educating users: Choose different passwords
+	- Electronic Monitoring
+		- Communicating a password in plaintext is vulnerable to eavesdropping
+		- Countermeasures
+			- Never send a password in plaintext
+			- Technical solutions for secure transfer of passwords
+
+- Password Protection
+	- Salt with hash
+		- To mitigate some password vulnerabilities, e.g same passwords have the same hash value
+		- Salt is a random number
+		- Increases attackers workload
+		- At the time of registration the server can store
+			- UserID
+			- Salt
+			- Salted Password Hash
+		- Verifying Password Salt with Hash
+			- The user provides UserID and password
+			- Lookup the corresponding salt and hash
+		- Random Salt Benefits
+			- Difficult to guess if one user chooses the same password for multiple services
+			- Difficult to guess if multiple users choose the same password for a single server (or more)
+			- Makes offline dictionary attack difficult
+			- Protection against rainbow tables, pre computed hash values (e.g with every possible salt), the solution is to use a large salt.
+	- Multi-Factor Authentication
+		- Different factors or means of authentication
+			- Something you know, pin or password
+			- Something you have (token) e.g smartcard
+			- Something you are (static biometrics), fingerprint
+			- Something you do (dynamic biometrics), voice or behavior
+		- 2 or more for 2-factor or multifactor.
+
+## Lecture 5
+
+- Authorisation
+	- A process of granting rights or permissions to a system entity
+	- To provide access to a given resource
+	- This is also known as **access control**
+- Access Control Requirements
+	- Reliable inputs
+		- Authenticated entities
+			- E.g using UPI and password
+		- Genuine information
+			- E.g student or staff member
+	- Principle of Least privilege
+		- Deals with granting the minimum set of access rights to do a job
+		- Accessing a single course vs all courses
+		- Grants the user the least amount of access they could have to do what they need to do (my words)
+	- Administrative Duties
+		- Only a special entity should be able to manage access rights
+		- E.g. granting revoking or updating access rights.
+- Access Control Elements
+	- Subject
+		- A user
+		- An entity than can access objects
+		- Or a process that is representing a user/application
+	- Object
+		- An entity that needs  to be protected
+			- E.g files directories or other resources
+	- Access Right
+		- An access right r describes how a subject s can access an object o
+		- E.g read write execute create delete and search
+- Access Control System
+	- Access control function f(s, o, r)
+		- It looks up access right r for the combintiopn (s,o)
+		- On a successful match, it grants access, otherwise not
+	- Security Administrator
+		- An entity that managed access rights
+	- Auditor
+		- An entity that inspects the whole authorisation system
+- A typical Access Control System
+	- ![[Pasted image 20240731184219.png]]
+- Access Control Models
+	- Discretionary Access Control (DAC)\
+		- Resource owner decides who can access and level of access, i.e. the owner may grant access to subjects
+		- Access is granted based on identity of the requester
+		- These mechanisms are adequate for honest users
+		- Vulnerable to trojan horses
+		- DAC is used in operating systems
+			- E.g linux file permissions: rwxr-x--x, read(r), write(w), execute(x)
+		- Access Control Matrix
+			- ![[Pasted image 20240731184806.png]]
+			- ![[Pasted image 20240731190120.png]]
+			- ![[Pasted image 20240731190129.png]]
+	- Mandatory Access Control (MAC)
+	- Role-Based Access Control (RBAC)
+		- RBAC maps roles (e.g in an organisation) to access rights.
+		- Similar to DAC but is to a role rather than an individual
+		- Supports complex access control
+		- Reduces errors in administration compared to user-assigned access.
+		- Ease of administration
+			- Move users in and out of roles
+			- Move permissions in and out of roles
+			- Very flexibile, compliance within organisation
+		- Least privilege
+			- Restricted access according to needs
+			- Separation of duties through constraints
+		- RBAC Model
+			- User
+				- Employees / Human Being
+			- Permissions
+				- Approval of a mode of access to some object
+			- Roles
+				- Job title
+			- Assignments
+				- user-role and role-perm
+			- Session
+				- Mapping of users to roles
+			- Constraints
+				- Restrictions that can be placed: e.g sessions, assignments, and roles
+		- Core RBAC
+			- ![[Pasted image 20240731185738.png]]'![[Pasted image 20240731185810.png]]
+	- Usage control (UCON)
+	-  Policy-Based Access Control (PBAC)
+		
