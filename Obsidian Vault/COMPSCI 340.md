@@ -108,4 +108,102 @@
 		- especially important in real-time syustems
 		- malloc or callic
 		- free(thread)
+
+## Lecture 8
+- Process Control Block (PCB)
+	- Information associated with each process (also called task control block)
+	- Where the OS can find all the information it needs to know about a process
+		- Process identified and manged via a process identifier (pid)
+		- Process state, running waiting, etc
+		- Program counter
+		- CPU registers
+			- contents of all process-centric registers
+		- CPU scheduling information
+			- priorities, scheduling queue pointers
+		- Memory-management information
+			- memory allocated to the process
+		- Accounting information
+			- CPU used, clock time elapse since start, time limits
+		- I/O status
+			- I/O devices allocated to process, list of open files
+	- Doesnt have to be kept together
+	- ![[Screenshot 2024-08-01 at 2.14.05 PM.png]]
+- UNIX PCBs
+	- The PCB is the box labelled process structure but the user structure maintains some of the information as well (only required when the process is resident)
+	- ![[Screenshot 2024-08-01 at 2.16.05 PM.png]]
+- Windows NT PCBs
+	- Information is scattered in a variety of objects
+	- Executive Process Block (EPROCESS) includes:
+		- KPROCESS and PEB (Process Environment Block)
+			- KPROCESS includes info the kernel needs to scheduele threads
+				- Kernel and user times
+				- Pointers to threads
+				- Priority information
+				- 
+			
+		- Points to threads
+		- Priotity information
+- ![[Screenshot 2024-08-01 at 2.23.03 PM.png]]
+- Linked together with a doubley linked list
+- Process State
+	- As a process executes it changes state
+		- New: the process is being created
+		- Running: being executed
+		- Waiting: pending for some event to occur
+		- Ready: the process is waiting to be assigned to a processor
+		- Terminated: finished executing
+		- ![[Screenshot 2024-08-01 at 2.25.22 PM.png]]
+- Process Creation
+	- Different methods of creating processes
+		- Create process system call
+			- takes a program name or a stream with the program data
+			- windows
+		- copy process system call
+			- A strange way of doing it but is now very widespread thanks to UNIX
+		- Create a new terminal session
+		- Requires
+			- A spare or new PCB
+			- mark it new
+			- generate a unique identifier
+			- get some memory (what if there isnt any) or
+			- fill in page table entries
+			- set up PCB fields with initial values
+			- set priority and resource limits
+			- change state to ready
+			- can be done by inserting into a queue of runnable processes
+		- What about other resources?
+			- Some OS' carefully allocate resources before a process runs (this prevents deadlock later)
+			- Others leave these to the process to collect as it runs
+		- Address space
+			- Child duplicate of parent 
+				- each one has its own copy of any data
+				- Child has a new program loaded into it
+			- UNIX Examples
+				- fork() system call creates a new process
+				- exec() system call used after a fork() to replace the processes memory space with a new program
+				- Parent process calls wait() waiting for the child to terminate
+				- ![[Screenshot 2024-08-01 at 2.35.45 PM.png]]
+	- UNIX Fork() Call
+		- Parent process
+			- the one who made the call
+		- Child
+			- new process
+		- Traditionally memory was duplicated - the code was shared even from earliest days
+			- Share open files as well
+			- Open file information will have the count of processes using them increases by one
+			- And shared memory regions
+			- Fork returns 0 in the child process and the childs pid in the parent
+			- ![[Screenshot 2024-08-01 at 2.40.05 PM.png]]
+			- ![[Screenshot 2024-08-01 at 2.48.51 PM.png]]
+			- 6 times
+	- Exec() System call
+		- Checks to see if the file is executable
+		- saves any parameters in some system memory
+		- releases currently held memory
+		- loads the program
+		- moves the save parameters into the stack space of the new program
+		- ready to run again
+	- Fork used to copy the data memory of the process
+	- If the child is going to do na exec this is a waste of effort
+	- particularly bad with virtual memory
 	- 

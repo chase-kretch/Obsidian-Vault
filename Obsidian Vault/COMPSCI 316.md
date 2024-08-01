@@ -334,4 +334,99 @@ Sample Question GDPR
 		- Intrusion detection System (IDS)
 		- Intrusion Prevention System (IPS)
 	- Educate Users
-		
+
+## Lecture 8
+
+- Vulnerabilities
+	- OWASP stands for Open web application security project
+		- A community that investigates web security
+		- OWASP top 10, the list of the 10 most seen vulnerabilities
+			- It also shows their risk, impacts and countermeasures
+			- Every 3-4 years
+	- ![[Screenshot 2024-08-01 at 12.09.48 PM.png]]
+- Injection
+	- An injection flaw occurs when untrusted input gets processed as part of a command or query
+	- The attacker can inject input data
+		- The attacker can execute unintended commands
+		- and can access unauthorised data
+	- Examples
+		- Command injection
+		- SQL Injection
+	- ![[Screenshot 2024-08-01 at 12.22.16 PM.png]]
+	- ![[Screenshot 2024-08-01 at 12.17.14 PM.png]]
+	- Countermeasures
+		- Separation of data from application logic
+		- Input validation
+		- Setting to limit data exposure in case of successful injection attacks
+		- Using parameterised queries to prevent injection flaws
+- Broken Authentication
+	- Application functions related to authentication and session management are often implemented incorrectly
+	- This allows attackers to compromise passwords, keys, or session tokens
+	- Reasons
+		- Allowing default, weak, or well-known passwords
+		- Application session timeouts not set properly
+	- Countermeasures
+		- Use Multi-factor authentication
+		- Do not use default credentials
+		- Enforce strong password policies
+		- Limit / increasingly delay failed login attempts
+		- Securely use session ID and invalidate after logout, idle and timeouts
+- Sensitive data exposure
+	- Sensitive data requires protection as per EU GDPR and local privacy laws
+		- Financial data
+		- healthcare data
+		- Personal Identification number (PII)
+	- Many APIs do not properly protect sensitive data
+	- The most common flaw is not encrypting sensitive data, e.g plain text by man-in-the-middle
+	- Weak cipher suits
+	- Storing hashed passwords without salts
+	- Countermeasures
+		- Identify sensitive data as per privacy laws
+		- Do not store sensitive data unnecessarily
+		- Make sure to protect all sensitive data
+		- encrypt all data in transit
+		- Use salt with password hashes
+			- Also use a work factor (#iterations) i.e delay factor
+- XML External Entities (XXE)
+	- XML: extensible markup language
+	- Many older or poorly configured XML processors evaluate external entity references within XML documents
+	- External entities can be used to
+		- Disclose internal files
+		- Scan internal systems
+		- Remote code execution
+		- DoS by including a potentially endless file
+	- Countermeasures
+		- Patch or upgrade all XML processors and libraries
+		- Disable XEE
+		- Validate incoming XML
+- Broken Access Control
+	- Bypassing access control checks
+	- Unauthenticated user accessing authenticated pages
+	- A non-admin accessing admin pages
+	- Countermeasures
+		- Except public resources, deny by default
+		- log access control failures
+		- Set API rate limits: restricted number of requests to minimise harm from automated attacks
+- Security Misconfiguration
+	- Attackers often attempt to exploit unpatched flaws or access default accounts
+	- An application server configuration with defaulted error messages
+		- e.g stack traces
+		- This can expose sensitive information
+	- Countermeasures
+		- Review and update configurations
+		- An Automated process to validate the effectiveness of configurations and settings
+			- Test in all possible environments
+- Cross Site Scripting (XSS)
+	- XSS flaws occur whenever untrusted data is injected but not validated
+	- XSS allows attackers to execute scripts in the victims browser
+		- Attracting users to click on the link containing evil script in URL
+	- Countermeasures
+		- Separating untrusted data from browser content
+		- Using frameworks that automatically escape XSS by design
+- Insecure deserialisation
+- Using component with known vulnerabilities
+- Insufficient logging and monitoring
+- CVE & NVD
+	- Common vulnerabilities and exposures
+	- Nation Vulnerability Database
+		- scored by CVSS Common Vulnerability Scoring System
