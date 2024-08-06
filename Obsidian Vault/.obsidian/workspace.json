@@ -33,14 +33,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMPSCI 316.md",
+                "file": "COMPSCI 340.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "dbde751fa9bc6432",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Compsci 335.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -110,6 +122,45 @@
                 "useHierarchy": true
               }
             }
+          },
+          {
+            "id": "0ef88cb5e2b1cfb3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Compsci 335.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "537dce9453e0d6a2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Compsci 335.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "b9df425c32030058",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Compsci 335.md"
+              }
+            }
           }
         ]
       }
@@ -128,21 +179,22 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "adc36e13b7bb53a7",
+  "active": "dbde751fa9bc6432",
   "lastOpenFiles": [
+    "COMPSCI 340.md",
+    "Compsci 335.md",
+    "Pasted image 20240806173422.png",
+    "Pasted image 20240806173300.png",
+    "Pasted image 20240806172455.png",
+    "Pasted image 20240806171331.png",
+    "Pasted image 20240806020610.png",
     "316 Tutorial.md",
     "COMPSCI 316.md",
-    "COMPSCI 340.md",
     "Screenshot 2024-08-01 at 2.48.51 PM.png",
     "Screenshot 2024-08-01 at 2.40.05 PM.png",
     "Screenshot 2024-08-01 at 2.35.45 PM.png",
     "Screenshot 2024-08-01 at 2.25.22 PM.png",
     "Screenshot 2024-08-01 at 2.23.03 PM.png",
-    "Screenshot 2024-08-01 at 2.16.05 PM.png",
-    "Screenshot 2024-08-01 at 2.14.05 PM.png",
-    "Screenshot 2024-08-01 at 12.22.16 PM.png",
-    "Screenshot 2024-08-01 at 12.22.07 PM.png",
-    "Screenshot 2024-08-01 at 12.17.14 PM.png",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]
