@@ -45,7 +45,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Compsci 335.md",
+                "file": "COMPSCI 316.md",
                 "mode": "source",
                 "source": false
               }
@@ -129,7 +129,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Compsci 335.md",
+                "file": "COMPSCI 316.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -146,7 +146,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Compsci 335.md",
+                "file": "COMPSCI 316.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -158,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Compsci 335.md"
+                "file": "COMPSCI 316.md"
               }
             }
           }
@@ -181,20 +181,21 @@
   },
   "active": "dbde751fa9bc6432",
   "lastOpenFiles": [
-    "COMPSCI 340.md",
+    "Pasted image 20240808142524.png",
+    "Pasted image 20240808142508.png",
+    "Pasted image 20240808142333.png",
+    "Pasted image 20240808142308.png",
+    "Pasted image 20240808142032.png",
+    "Pasted image 20240808142024.png",
+    "Pasted image 20240808141924.png",
+    "Pasted image 20240808141854.png",
+    "Pasted image 20240808141342.png",
+    "Pasted image 20240808140919.png",
+    "Pasted image 20240808140826.png",
     "Compsci 335.md",
-    "Pasted image 20240806173422.png",
-    "Pasted image 20240806173300.png",
-    "Pasted image 20240806172455.png",
-    "Pasted image 20240806171331.png",
-    "Pasted image 20240806020610.png",
+    "COMPSCI 340.md",
     "316 Tutorial.md",
     "COMPSCI 316.md",
-    "Screenshot 2024-08-01 at 2.48.51 PM.png",
-    "Screenshot 2024-08-01 at 2.40.05 PM.png",
-    "Screenshot 2024-08-01 at 2.35.45 PM.png",
-    "Screenshot 2024-08-01 at 2.25.22 PM.png",
-    "Screenshot 2024-08-01 at 2.23.03 PM.png",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]

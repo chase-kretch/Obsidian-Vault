@@ -335,6 +335,94 @@ Sample Question GDPR
 		- Intrusion Prevention System (IPS)
 	- Educate Users
 
+## Lecture 7
+
+Usable Security Engineering 2
+
+- Humans
+	- Amateurs hack systems, professionals hack people
+	- People often represent the weakest ilink in the security chain and are chronically responsible for the failure of security systems
+	- If you think technology can solve your security problems, then you dont understand the problems and you dont understand the technology
+	- Humans are incapable fof securely storing high-quality cryptographic keys, and they have unacceptable speed and accuracy when performing cryptographic operations
+	- They are also large, epxensive to maintain, difficult to manage, and they pollute the environment we must design our protocols around their limitations
+
+	- Password rules 
+		- Lowercase, uppercase
+		- Mix of numbers
+		- Symbols
+		- Min characters etc.
+		- Humans are bad at making passwords!
+		- ![[Pasted image 20240808141342.png]]
+		- Famous people who you can easily find information about online are more suscepitble
+- Usable Security: Interdisciplinary
+	- Usable security is interdisciplinary nature. Other disciplines will consist of studying human bheavior
+	- We can borrow their theories, frameworks models and methods:
+		- Psychology
+		- Sociology
+		- Ethnography
+		- Cognitive Sciences
+		- Warning science
+		- Risk perceptions
+		- Organisational change
+		- Behavioral economics
+		- HCI
+		- Marketing
+		- Counterterrorism
+		- Communication
+		- Persuasive technology
+		- Learning science
+		- Network analytics
+	- Usable security is not tradition Usability (HCI)
+		- Security is not very often the primary task of the user
+			- Many applications handle security issues through security alerts that interrupt users primary task
+			- Users find it is distracting and therefore would rather ignore, circumvent or even defeat.
+		- Securing information is about understanding risk and threats
+			- They are usually overlooked in traditional HCI
+		- What makes usable security different
+			- Discrete technical problems are all well-understood under the umbrella of on-line security and privacy attacks
+			- legitimate users + presence of an adversary
+			- Systems should remain secure when
+				- The attacker tries to fool/trick users
+				- The user behaves in un/predictable ways
+				- Using the system under stress, pressure or tension
+				- The user is busy, careless or unmotivated
+			- Usability (HCI) itself is insufficient to keep systems that remain secure
+		- Better together = Security AND Usability
+		- ![[Pasted image 20240808141854.png]]
+		- Is all about designing systems that are secure and usable
+		- Usable security bridges security and usability
+		- Usable Security Table
+			- ![[Pasted image 20240808141924.png]]
+		- user selected graphical passwords
+		- ![[Pasted image 20240808142024.png]]
+		- ![[Pasted image 20240808142032.png]]
+	- Humans and Secure Systems
+		- The human threat
+			- Malicious humans
+			- Clueless humans
+			- Unmotivated humans
+			- Humans constrained by human limitations
+		- What can make a system unusable
+			- Confusing/misleading/unhelpful user interface
+			- Requiring user to make decisions for which user is not qualified
+			- Knowledge or abilities that user does not have
+			- Unreasonable amount of attention/effort
+		- Understanding Humans in the loop
+			- Do they know they are supposed to be doing something
+			- Do they understand what they are supposed to do 
+			- Do they know  how to do it
+			- Are they motivated to do it
+			- Are they capable of doing it
+			- Human in the loop framework
+				- Models human interaction with secure systems
+				- Can help identify human threats
+				- ![[Pasted image 20240808142308.png]]
+			- Human threat identification and mitigation process
+			- ![[Pasted image 20240808142333.png]]
+	- Developing Cyber security training interventions
+	- ![[Pasted image 20240808142508.png]]
+	- ![[Pasted image 20240808142524.png]]
+	- 
 ## Lecture 8
 
 - Vulnerabilities
@@ -430,3 +518,42 @@ Sample Question GDPR
 	- Common vulnerabilities and exposures
 	- Nation Vulnerability Database
 		- scored by CVSS Common Vulnerability Scoring System
+
+## Lecture 9
+
+Privacy Preserving Software Systems
+
+- Trading Privacy for Convenience
+	- Uber Data Breach
+		- Concealed a hack that affected 57 million customesr and drivers.
+		- Paid hackers 100 thousand to delete the data
+	- Zoom Bombing
+		- Unwanted person joining Zoom meeting interrupting eavesdropping, etc.
+	- Privacy Threats of AMMI Safe Drive App
+	- Twitters Privacy Policy
+		- It would take the average internet user 244 hours to read every privacy policy for every website they visited in one year
+		- In systems privacy policies should be presented in a way thats at all designed with the reader in mind rather than desgiend with the lawyers protecting themselves in mind
+	- WhatsApp Updating Privacy Policy
+		- Sharing users numbers with FaceBook for advertising
+	- What the Study Did?
+		- Identifying the problems programmers face when embedding privacy into software applications
+		- Providing solutions to those problems are important to enable the development of privacy preserving software systems
+		- This study investigates 36 software developers in a software design task
+		- PRovided them with instructions to embed privacy in order to identify the rpoblems they face
+	- What the Study Found
+		- Developers have pratical issues when they attempt to embed privacy into software applications
+		- They find it difficult torelate privacy requirements into engineering techniques
+		- Privacy concepts may not work in software development environments
+		- When developers lacked knowledge, their personal opinions and complex system requirements seem to take precedence over privacy requirements - resulted in software applications with limited or no privacy embedded at all.
+	- Developing a methodology
+		- ![[Pasted image 20240808140826.png]]
+	- Software developers need an education too!
+		- An educational intervention
+		- Enhance developers secure coding behaviour through motivation
+		- A serious game for teaching
+		- ![[Pasted image 20240808140919.png]]
+	- Future work
+		- Empirically investigate the developed framework
+		- Incorporating the framework into a gaming application
+		- Investigate developers impact after their engagement with the gaming application
+	- 
