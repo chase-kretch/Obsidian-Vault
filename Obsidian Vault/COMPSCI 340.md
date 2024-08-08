@@ -109,6 +109,157 @@
 		- malloc or callic
 		- free(thread)
 
+## Lecture 6
+
+Processes and Threads
+
+- Process
+	- The thing which represents our work to the systemm
+	- Sometimes referred to as a heavyweight process
+		- I instance of a program in execution
+	- May be more than one version of the same program running at the same time (hopefully sharing the code), each instance has resources limitations, security information, rights, capabilities etc.
+	- So it includes code, data, connections (to files networks and other processes) access to devices
+	- It needs the processor to run, but it doesnt run all the time. So it needs information about what it is up to stored somewhere
+- Two parts to a process
+	- 1, Resources, the things that the process owns (may be shared) also information about the process
+	- 2, What the process is doing - streams of execution
+	- Traditin processes had resources and a single current location e.g traditional UNIX. The resource part is called a task or a job. The location part is commonly called a thread
+	- Most operating systems now provide support to keep these parts separate e.g Linux, Solaris, Windows and MacOS
+- Threads
+	- Sometimes referred to as lightweight processes
+	- A sequence of instuructions being executed when there is no external intervention.
+	- Multiple threads of a process, share the prcess resources but have their own thread ID, PC, registers and stack
+	- Easier to create than a process. They provide a nice encapsuilation of a problem within a process rather than multiple processes
+	- Easier to switch between threads than between processes.
+	- Typical Uses
+		- Splitting work across processors (shared memory multiprocessor, multiple cores)
+		- added responsiveness (handle user input while still finishing another function)
+		- controlling and monitoring other threads
+		- server applications
+		- can help with program abstraction
+	- Thread implementation
+		- User-level (green threads)
+			- The OS only sees one thread per process
+			- The process constructs other threads by user-level library calls or by hand
+			- user-level control over starting and stopping threads
+			- usually a request is made to the OS to interrupt the process regularly (an alarm clock) so that the process can schedule another thread
+			- The state of threads in the library code does not correspond to the state of the process
+		- System-level
+			- The OS knows about multiple threads per process 
+			- Threads are constructed and controlled by system calls
+			- The system knows the state of each thread
+		- User-level advantages
+			- Works even if the OS doesnt support threads
+				- Some implementations of Java had user-level threads because the underlying OS didnt
+			- Easier to create- no system call
+				- Just normal library procedure call
+				- No switch into kernel mode (this saves time)
+			- Control can be application specific
+				- Sometimes the OS doesn't give the type of control an application needs
+				- e.g Precise priority levels, changing scheduling decisions according to state changes
+			- Easier to switch between - saves processor mode changes
+				- Can be as simple as saving and loading registers (including SP, PSW and PC)
+			- The reason this isn't always better  than system-level threads is because the OS only sees one thread per process so e.g if the thread is waiting for I/O the whole system will wait for I/O
+		- System-Level thread advantages
+			- Each thread can be treated separately
+				- Rather than using the timeslice of one process over many threads
+				- Should a process with 100 threads get 100 times the CPU time of a process with 1 thread.
+					- No! All threads have their individual CPU time and priority
+			- A thread blocking in the kernel doesn't stop all other threads in the same process
+				- With user-level threads if one thread blocks for I/O the OS sees the process as blocked for I/O even if there are other threads running
+			- On a multiprocess (including multi-core) different threads can be scheduled on different processores
+				- This can only be done if the OS knows about the threads
+				- Even then it sometimes doesnt work -standard Python has system level threads but the Global Interpreter Lock (GIL) means that only one runs at a time even on a multicore machine
+		- Which of these can't be done with User-level threads?
+			- Splitting work across processes (shared memory multiprocessir, multiple cores)
+				- No! Because the operating system sees the process as one
+			- Added responsiveness (handle user input while finishing another function)
+				- No (atleast not efficient), the OS will view the user-input threads of a process a single thread and once one is waiting for I/O the process will be considered blocked/waiting
+			- Controlling and monitoring other threads
+				- Is possible at user level as we dont need multiple processes running
+			- Server Applications
+				- It is possible with user level threads but to use multithreading and multicore CPUs we need server threads
+			- Can help program abstraction
+				- Yes, both system and user level are useful for concurrent programs
+	- Jacketing
+		- One major problem is user-level threads is the blocking of all threads within a process when one blocks
+		- A possible solution is known as jacketing
+			- A blocking system call has a user-level jacket
+			- The jacket checks to see if the resource is available e.g device is free
+			- If not another thread is started
+			- When calling thread is scheduled again (by the thread library) it once again checks the state of the device
+		- So there has to be some way of determining is resources are available to accept requests immediately
+	- The best of both worlds
+		- Solaris (versions < 9) had both user-level and ssytem-level threads.
+		- LWP (light weight process) what we call system level threads)
+		- Kernel Threads - active within the kernel
+			- Each LWP is associated with one kernel thread
+		- One or more user threads could be multiplexed on each LWP
+		- A process could have several user and several LWPs
+		- The number of LWPs per process as adjusted automatically to keep threads running
+			- If all LWPs in process block, but there are user level threads which could run kernel creates new LWP
+		- ![[Pasted image 20240806020610.png]]
+	- Original Linux Threads (before 2.6)
+		- Thread creation is done through clone() system call.
+		- Clone() makes a new process
+			- Shares memory address space, open files, signal handlers)
+		- From one point of view original Linux threads were processes but they shared all resources and hence the advantages of threads
+		- original LINUX threads and POSIX
+			- Cant be set to schedule according to priority within a process
+				- Each thread is scheduled independently across all threads/processes in the system
+			- Cant send a signal to the whole process
+			- Ordinary system calls e.g read were nto cancellation points
+			- Starting a new program in one thread doesn't kill the other threads in the same process
+			- When an original Linux thread blocks doing IO do all other threads in the same process stop?
+## Lecture 7
+ Memory Layout of C Program
+- PThread Programming
+	- POSIX threads or ptrheads are used in UNIX type operating systems
+	- Use "man pthread_create" to get the manual page
+	- ![[Pasted image 20240806171331.png]]
+	- The #include needs to be added to the top of your source file
+	- going through the parameters
+		- thread is a pointer to a pthread_t type - this is where information about the thread is stored, we need this to join the thread when we wait for it to finish
+		- attr is a pointer to pthread attributes, to use the default we put NULL
+		- start_routine is the name of the function which the thread runs
+		- arg is a pointer to arguments/parameters used by the function
+	- Making sure a PThread has finished
+		- ![[Pasted image 20240806172455.png]]
+	- A thread function
+		- To keep our compiler happy our thread function must be of the type:
+			  void \*(\*start_routine) (void \*)
+		- The start_routine is a pointer to a function. In C this is exactly the same as a function name
+		- The function returns a pointer to a void (i.e, it can return a pointer to anything, we can cast it)
+		- The function accepts one parameter which is also a pointer to a void (i,e we can make it point to anything)
+			- void \*the_function(void \*params) {...}
+		- We run this in a thread by calling:
+			- pthread_create(&thread_info, NULL, the_function, (void \*) &args)
+			- Where args is a pointer to the values we want to send to the function, and thread_info is a pthread_t.
+				- pthread_t thread_info;
+		- ![[Pasted image 20240806173300.png]]
+- Memory Layout of a C Program
+	- ![[Pasted image 20240806173422.png]]
+	- Segmentation Fault
+		- Each region has its own set of permissions. For example. the code segment is usually marked as real-only to prevent accidental modification of the program code.
+		- Situations we may get a segmentation fault:
+			- Accessing unitialized memory
+			- Dereferencing a null pointer
+			- Stack overflow
+			- Accessing memory outside of its allocated space
+	- Address translation
+		- Virtual address spaces = pages
+		- Physical address space = frames
+		- How do we map virtual to physical
+		- Page tables map virtual to physical
+	- Benefits of Memory Mapping
+		- Efficient use of physical memory
+			- By allowing multiple processes to share the same physical memory, the operating system can use memory more efficiently
+		- Protection
+			- Each process has its own virtual memory space, which provides protection against other processes accessing its memory
+		- large address space
+			- Virtual memory allows each process to have a larger virtual address space than is available in physical memory
+		- 
+			  
 ## Lecture 8
 - Process Control Block (PCB)
 	- Information associated with each process (also called task control block)
