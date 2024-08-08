@@ -11,3 +11,17 @@ Tutorial 2)
 8) Hashing is preferred for passwords. This is because hashing is impossible to backtrack from while encryption can be decrypted. This means your password if hashed cannot be figured out even if you have the hash value.
 9) Malware analysis is where analyst try to understand malware to see how it interacts with the system to then produce anti-malware. Dynamic analysis is running malware, static is reading code. Sandboxing is the act of creating a secure environment to see how it interacts with a machine without it potentially causing harm.
 10) Performance loss or unknown programs running in the background, unknown network traffic from computer. First step is to scan computer for malware.
+
+Tutorial 3)
+
+1) b
+2) b
+3) iv
+4) iv
+5) b
+6) a  d
+7) D, C, E, A, B
+8) Since the data is separated it is unable to access this data via an input
+9) This is because many users/humans are too lazy to properly take security countermeasures seriously and since they are the largest vulnerability in most systems this is really bad. Making it usable allows them to easily take the countermeasures without too much thought
+10) Passwords, private information, etc.
+	1) hashing with salt to protect passwords, not sending private information over plaintext

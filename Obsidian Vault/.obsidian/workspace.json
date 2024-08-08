@@ -110,6 +110,45 @@
                 "useHierarchy": true
               }
             }
+          },
+          {
+            "id": "03e603a8c92d1d2d",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "316 Tutorial.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8ab43251726a765b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "316 Tutorial.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "968301651e96e0fe",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "316 Tutorial.md"
+              }
+            }
           }
         ]
       }
@@ -130,6 +169,9 @@
   },
   "active": "adc36e13b7bb53a7",
   "lastOpenFiles": [
+    "COMPSCI 316.md",
+    "316 Tutorial.md",
+    "COMPSCI 340.md",
     "Pasted image 20240808142524.png",
     "Pasted image 20240808142508.png",
     "Pasted image 20240808142333.png",
@@ -140,11 +182,7 @@
     "Pasted image 20240808141854.png",
     "Pasted image 20240808141342.png",
     "Pasted image 20240808140919.png",
-    "Pasted image 20240808140826.png",
     "Compsci 335.md",
-    "COMPSCI 316.md",
-    "316 Tutorial.md",
-    "COMPSCI 340.md",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]
