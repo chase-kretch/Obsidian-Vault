@@ -33,14 +33,38 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "316 Tutorial.md",
+                "file": "COMPSCI 340.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "dbde751fa9bc6432",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMPSCI 340.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "0b6035c809e42b17",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "COMPSCI 316.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -112,12 +136,12 @@
             }
           },
           {
-            "id": "03e603a8c92d1d2d",
+            "id": "0ef88cb5e2b1cfb3",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "316 Tutorial.md",
+                "file": "COMPSCI 316.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -129,24 +153,24 @@
             }
           },
           {
-            "id": "8ab43251726a765b",
+            "id": "537dce9453e0d6a2",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "316 Tutorial.md",
+                "file": "COMPSCI 316.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "968301651e96e0fe",
+            "id": "b9df425c32030058",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "316 Tutorial.md"
+                "file": "COMPSCI 316.md"
               }
             }
           }
@@ -167,22 +191,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "adc36e13b7bb53a7",
+  "active": "0b6035c809e42b17",
   "lastOpenFiles": [
-    "COMPSCI 316.md",
-    "316 Tutorial.md",
+    "Pasted image 20240815002457.png",
+    "Pasted image 20240815002116.png",
+    "Pasted image 20240815001950.png",
+    "Pasted image 20240815001731.png",
+    "Pasted image 20240814223328.png",
+    "Pasted image 20240814222610.png",
+    "Pasted image 20240814222536.png",
+    "Pasted image 20240814222506.png",
+    "Pasted image 20240814222355.png",
+    "Pasted image 20240814222341.png",
+    "Pasted image 20240814222255.png",
+    "340 Tuts.md",
     "COMPSCI 340.md",
-    "Pasted image 20240808142524.png",
-    "Pasted image 20240808142508.png",
-    "Pasted image 20240808142333.png",
-    "Pasted image 20240808142308.png",
-    "Pasted image 20240808142032.png",
-    "Pasted image 20240808142024.png",
-    "Pasted image 20240808141924.png",
-    "Pasted image 20240808141854.png",
-    "Pasted image 20240808141342.png",
-    "Pasted image 20240808140919.png",
     "Compsci 335.md",
+    "316 Tutorial.md",
+    "COMPSCI 316.md",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]

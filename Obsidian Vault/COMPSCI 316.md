@@ -556,4 +556,229 @@ Privacy Preserving Software Systems
 		- Empirically investigate the developed framework
 		- Incorporating the framework into a gaming application
 		- Investigate developers impact after their engagement with the gaming application
-	- 
+
+## Lecture 10
+
+- Program Analysis
+	- The process of analysing the behaviour of programs
+	- THe main goal is to find problems in code
+	- Program analysis can be performed
+		- without execution (static analysis)
+		- during runtime (dynamic)
+		- by combining both (concolic execution)
+	- Static Analysis
+		- Without actually executing a program
+		- Static analysis typically discover properties for all executions
+		- Full coverage of source or binary
+		- program-centric
+		- A kind of white box testing
+		- Scalable
+		- Accuracy issues, false positives
+		- Can be run before dynamic analysis
+	- Dynamic Analysis
+		- Running a program
+		- Exposes vulnerabilities in the deployment environment
+		- Difficult to generate and test all possibilities
+		- Limited coverage
+		- More accurate
+		- Input-centric
+		- A kind of black box testing
+		- Can be run after static analysis
+	- Control Flow Analysis
+		- It is typically a static analysis technique for determining the control flow of a program
+		- often used to test developers own program
+		- The control flow is expressed as a Control Flow Graph (CFC) Possible execution sequences
+	- Data Flow Analysis
+		- A technique for gathering information about the possible set of values at specific points 
+		- A CFG is used to determine those values 
+		- A simple way is to set up data flow equations for each node in CFG
+		- ![[Pasted image 20240814222018.png]]
+	- Program Slicing
+		- A static program analysis: reducing program to the minimum form that still produces the selected behaviour
+		- The reduced program is called a slice
+		- Generally, finding a slice is an unsolvable program; Possible to obtain approx slices using a data-flow algorithm
+		- Used by developers during debugging to locate the source of errors
+	- Symbolic Execution
+		- A static analysis technique: executing the program with symbolic valued input ( as opposed to concrete valued input)
+		- Both a path symbolically executed independently forming an execution tree
+		- ![[Pasted image 20240814222204.png]]
+	- C program with CFG
+	- ![[Pasted image 20240814222341.png]]
+	- ![[Pasted image 20240814222355.png]]
+	- Concolic Execution
+		- First static followed by dynamic
+		- Motivation: Long path or complex path conditions for symbolic executions 
+			- Concolic = Concrete + Symbolic
+		- Concrete execution
+			- A form of dynamic analysis
+			- Takes path based on concrete input values
+		- Also called dynamic symbolic execution
+		- Used for analysing complex programs
+		- ![[Pasted image 20240814222506.png]]
+		- ![[Pasted image 20240814222536.png]]
+		- ![[Pasted image 20240814222610.png]]
+
+
+## Lecture 11
+
+- Code Obfuscation
+	- A promising technique to protect sensitive information in application code
+		- e.g password match or licence check
+	- Aims at hardening the process of reverse engineering
+	- Code obfuscation can be broadly classified into four main categories (Balachandran TIFS13)
+		- Layout
+		- Design
+		- Data
+		- Control
+- Layout Obfuscation
+	- Refers to obscuring the layout of the program
+	- Not affect executable part of the code
+	- Examples:
+		- Deleting comments
+		- Removing debugging information
+		- Renaming variables
+- Design Obfuscation
+	- Refers to obscuring the design intent of the software system
+		- Particular for object-oriented applications, e.g splitting/merging classes
+	- Aims at prevented the adversary from extracting information from the data used in the program
+	- Examples
+		- Encoding (encryption)
+		- Variable splitting
+			- Split v into p and q such that v = p XOR q
+		- Changing lifetime of variables
+			- e.g local <-> global
+- Control Obfuscation
+	- Or control flow obfuscation: obscure codes logic flow
+	- Examples
+		- Opaque prdicates: e.g if(A >0) easty to guess TRUE/FALSE but replace with if(A > (b^2+b)%2) etc. hard to guess.
+		- Control flow flattening: break/change the structure of control flow graphs
+		- ![[Pasted image 20240814223328.png]]
+- Reverse Engineering
+	- Process of analysing (e.g code) through deducting reasoning of what happens previously
+	- Also called backwards/back engineering
+- Summary
+	- Code obfuscation is used in practice
+	- Software developers use obfuscation 
+		- tTo protect intellectual property
+		- To make app repackaging difficult
+	- Malware developers also use obfuscation to hide malicious code
+	- There is an arms race between code obfuscation and reverse engineering
+
+## Lecture 12
+
+- The uncontrollable Nature of Threats
+	- Threats cant be eliminated ie, they are always present
+	- You cannot affect the threat itself
+	- You can take action to reduce the potential for a threat to occur or reduce the impact of a threat
+	- Unintentional Threats
+		- Envuronmental
+		- Human
+		- Accidental
+		- Failure
+	- Intentional Threats
+		- Greed
+		- Agner
+		- Desire to Damage
+- Common Attackers
+	- Criminals
+	- Advanced Persistent Threats (APTs)
+	- Vandals
+	- Saboteurs
+	- Disgruntled employees
+	- Activists
+	- Other nations
+	- Hackers
+- Threat vulnerability Pair
+	- Occurs when a threat exploits a vulnerability
+	- A vulnerability provides a path for the threat that results in a harmful event or a loss
+	- Both the threat and vulnerability must come together to result in a loss
+	- ![[Pasted image 20240815001731.png]]
+	- Example
+		- Threat Source
+			- Unauthorised Users (hackers)
+		- VUlnerability
+			- Identified flaws in system design
+			- New patches not applied
+		- Threat action
+			- Unauthorised access to files
+- U.S Government Risk Management Initiatives
+	- The National Institute of Standards and Technology (NIST)
+	- Homeland Security
+	- National Cybersecurity and Communications Integration Center (NCCIC)
+	- US Computer Emergency Readiness Team (US-CERT)
+	- The MITRE Corporation - COmmon vulterabilities Exposure List (CVE)
+	- ![[Pasted image 20240815001950.png]]
+- Vulnerability Mitigation Techniques
+	- Policies and Procedures
+	- Documentation
+	- Training
+	- Separation of Duties
+	- Configuration Management
+	- Version Control
+	- Patch Management
+	- Intrusion Detection
+	- Incident Response
+	- Continuous Monitoring
+	- Technical Controls
+	- Physical Controls
+- Understanding and Managing VUlnerabilities
+	- Countermeasures reduce risk and loss
+		- Reduce vulnerabilities
+		- Reduce impact of loss
+		- ![[Pasted image 20240815002116.png]]
+	- Risk Mitigation Techniques for Protecting Public Facing Servers
+		- Remove or change defaults
+		- Reduce the attack surface
+		- Keep the systems up to date
+		- Enable firewalls
+		- Enable intrusion detection systems (IDSs)
+		- Enable intrusion prevention systems (IPSs)
+		- Install antivirus software
+	- Best Practices for Managing threats
+		- Create a security policy
+		- Purchase insurance
+		- Use access controls
+		- Use automation
+		- Include input validation
+		- Provide training
+		- Use antivirus software
+		- Protect the boundary
+	- Best practices for managing vulnerabilities
+		- Identify vulnerabilities
+		- Match the threat-vulnerability pairs
+		- Use as many of the mitigation techniques as feasible
+		- Perform vulnerability assessments
+	- Best practices for managing exploits
+		- Harden servers
+		- Use configuration management
+		- Perform risk assessments
+		- Perform vulnerability assessments
+- Unintentional Threats
+	- Environmental
+		- Fire, wind
+		- Lightning, flooding
+		- Accident
+		- Equipment failures
+	- Human
+		- Keystroke errors
+		- Procedural errors
+		- Programming bugs
+- Intentional Threats
+	- Individual or Organisations
+		- Hackers
+		- Criminals
+		- Disgruntled employees
+- ![[Pasted image 20240815002457.png]]
+- Exploits
+	- Attack public facing servers
+	- Buffer Overflow
+	- SQL Injection
+	- DoS
+	- DDoS
+- Prioritizing Risk
+	- Organisations have limited funds
+		- Threats cannot be eliminated
+		- All vulnerabilities do not result in a loss
+		- Identify important risks
+	- Use resources to identify current risks
+
