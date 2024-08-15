@@ -25,3 +25,16 @@ Tutorial 3)
 9) This is because many users/humans are too lazy to properly take security countermeasures seriously and since they are the largest vulnerability in most systems this is really bad. Making it usable allows them to easily take the countermeasures without too much thought
 10) Passwords, private information, etc.
 	1) hashing with salt to protect passwords, not sending private information over plaintext
+
+Tutorial 4)
+
+1) C
+2) B
+3) B
+4) vi
+5) b
+6) v
+7) Since analysis only analyses the code, it cannot predict vulnerabilities based on input data. such as SQL injection or XSS
+8) Developer can reuse the code for other purposes, other people can access via his account as well
+9) Data obfuscation is attempting to make ur values harder to understand e.g using encrypted variables. This prevents an attacker from accessing variables when they have access to the source code or data. This can potentially slow down the program though. 
+10) They will lead to knowing more bugs and being more secure, yielding more satisfied clients.
