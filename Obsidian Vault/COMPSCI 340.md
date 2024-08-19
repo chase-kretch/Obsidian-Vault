@@ -357,4 +357,317 @@ Processes and Threads
 	- Fork used to copy the data memory of the process
 	- If the child is going to do na exec this is a waste of effort
 	- particularly bad with virtual memory
-	- 
+
+## Lecture 9
+
+- Solutions to fork() using memory
+	- copy on write
+		- No copy is made at first
+		- The data pages of the parent process are set of read only
+		- If a write occurs the reuslting exception makes a copy of the page for the other process
+		- preferred way nowadays
+	- vfork()
+		- needs programmers to know what they are doing
+		- doesnt copy entire address space
+		- let child work on parent address space
+		- parent process blocks until child finishes or calls exec.
+- ![[Pasted image 20240818230829.png]]
+- Runnable
+	- On a single core, only one process/thread can run at a tme (not always true simultaneous multithreading (SMT) or hyperthreading)
+		- Many may however be runnable - either running or ready
+- Pre-emptive multitasking
+	- A clock interrupt causes the OS to check to see if the current thread should continue
+		- Each thread has a time slice
+	- What advantages/disadvantages does preemptive multitasking have over cooperative multitasking
+		- Advantages
+			- control
+			- predictability
+		- disadvantages
+			- Critical sections (stopping during important stuff)
+			- Efficiency
+- Cooperative Multitasking
+	- Two main approaches
+		- A proces yields its right to run (yield() in java)
+		- System stops a process when it makes a system call
+	-  This doesnt mean a task will work to completion without allowing another process to run.
+	- A mixture
+		- Older versions of UNIX, did not allow preemptive multitasking when a process made a system call (ie. entered the kernel)
+- Context Switches
+	- It is the chance from one process running to antoher running on the same processer is usually referred to ass a context-switch
+	- What is the context (the state associated with the process)
+		- registers
+		- memory - including dynamic elements such as the call stack
+		- files, resources
+		- but also things like caches, TLB (translation lookaside buffer) values, these are normally lost
+	- Context of a process is represented in the PCB (process control block)
+	- The context changes as the process executes
+	- But normally a context switch means the chance from one process/thread running to another, or from a process/thread running to handling an interrupt. Whenever the process state has to be stored and restored
+	- ![[Pasted image 20240818232208.png]]
+	- Back to running after context switch
+		- State transition
+			- Must store process properties so it can restart where it was
+			- if changing processes the page table needs altering
+			- Rest of the environment must be restored
+			- if changing threads within the same process, simply restoring the registers might be enough
+			- Some systems have multiple sets of registers which means that a thread change can be done with a single instruction
+	- Waiting
+		- Processes seldom have all the resources they need when they start
+			- Memory
+			- Data from files or devices (i/o)
+		- waiting processes must not be allowed to unnecessarily consume resources, in particular the processor.
+			- state is changed to waiting
+				- more than one type of waiting state
+				- short wait e.g for memory
+				- long wait e.g for archied file
+			- removed from the ready queue
+			- probably entered on a queue for whatever it is waiting for
+		- When the resource becomes available
+			- state is changed to ready
+			- removed from waiting queue
+			- put back on the ready queue
+	- Suspended
+		- Another type of waiting
+			- ctrl-z in unix shell
+		- Operators or OS temporarily stopping a process ie it is not normally caused by the process itself
+			- allows others to run to completion more rapidly
+			- or to preserve the work done if there is a system problem
+			- or to allow the user to restart the process in the background
+		- Suspended processes are commonly swapped out of real memory
+			- This is a state which affects the process not individual threads
+	- Why we dont use Java suspend()
+		- If dealing with threads in Java we dont use these deprecated methods:
+		- suspend() freezes a thread for a while
+		- resume() releases the thread
+		- But we can easily get deadlock
+			- suspend() keeps hold of all locks gathered by the thread
+			- if the thread which was going to call resume() needs one of those locks before it can proceed we get stuck
+	- Why we dont use stop
+		- stop() kills a thread forcing it to release any locks it might have
+			- we will see where locks come from in later lectures
+		- the idea of using locks is to protect some shared data being manipulated simultaneously
+		- if we use stop() the data may be left in an inconsistent state when a new thread accesses it.
+	- Waiting in some UNIXes
+		- A process wiating is placed on queue (originally used to scan whole process table)
+		- The queue associated with the has value of a kernel address (waiting or suspended processes may be swapped out)
+			- when the resource becomes available
+			- all thngs waiting for that resource are woken up
+			- (may need to swap the process back in)
+			- first one to run gets it
+			- if not available when a process runs the process goes back to waiting
+			- a little like in Java
+				- while(notAvailable)
+					- wait();
+
+## Lecture 10
+
+Inter Process Communication
+
+- Process Termination
+	- Process executes last statement and then asks the operating system to delete it using the exit() system call
+		- Returns status data from child to parent (via wait())
+		- pid = wait(&status)
+	- Parent may terminate the execution of children processes using the abort() system call
+	- Some reasons for doing so:
+		- child has exceeded allocated resources
+		- Task assigned to child is no longer required
+		- The parent is exiting, and the operating systems does not allow a child to continue if its parent terminates (cascading termination - initiated by OS)
+	- All resources must be accounted for
+		- may be found in the PCB or other tables e.g devices, memory, files I/O buffers
+	- reduce usage count on shared resources
+		- memory, libraries, file/buffers
+	- if the process doesnt tidy up e.g close files, then something else must
+	- accounting information is updated
+	- remove any associated processes
+		- was this a session leader? if so then all processes in the same session be removed
+	- remove the user from the system
+	- notify the relatives
+- Unix Stopping
+	- Usually call exit(termination status)
+	- open files are closed - including devices
+	- memory is freed
+	- accounted updated
+	- if no parent waiting (did not invoke wait()) process is a zombie
+	- if parent terminated without invoking wait(), process is an orphan
+	- children get init as a step-parent
+	- parent is signalled (in case it is waiting or will wait)
+	- after the parent retrieves the termination status the PCB is freed)
+- Interprocess Communicaton
+	- Processes within a system may be independent or cooperating
+	- Cooperating process can affect or be affected by other processes
+	- Reasons for Cooperating processes:
+		- Information sharing
+		- Computation Speedup
+		- Modularity
+	- Cooperating processes need interprocess communication (IPC)
+	- Two models of IPC
+		- Shared memory (require process synchronization)
+		- Message Passes
+	- Shared memory
+		- Faster
+	- Message Passing
+		- Slower
+		- More Controlled
+		- Secure
+		- Needs:
+			- Some way of addressing the message
+			- SOme way of transporting the message
+			- Soem way of notifying the receiver that a message ahs arrived
+			- Some way of accessing or depositing the message in the receiver
+		- Message size is either fixed or variable
+		- send(destination, message)
+		- receive(source, message)
+		- write(message)
+		- read(message)
+		- In this case we also need some way of making a connection between the processes like an open() call.
+	- Design Decisions
+		- Implementation issues
+		- HOw are linked established
+		- Can a link be associated with more than two processes
+		- How many links can there be between every pair of communicating processes
+		- What is the capacity of a link
+		- Is the size of a message that the link can accomodate fixed or variable
+		- Is a link unidirectional or bi-directional
+		- Should the sender block until the message is received
+		- Should the receiver block until the message is available
+		- If both send and receive are blocking (synchronous communication) we have a rendezvous
+	- Direct Communication
+		- Processes must name each other explicitly
+			- send(destination, message)
+			- receive(source, message)
+		- Properties of communication kubj
+			- links are established automatically
+			- One link between each pair of processes
+			- Link may be unidirectional but is usually bi-directional
+			- Receiver doesnt have to know the id of the sender (it can receive it with the message)
+				- A server can receive from a group of processes
+			- Disadvantages
+				- Cant easily change the names of processes
+				- Could lead to multiple programs needing to be changed
+	- Indirect Communication
+		- Messages are directed and received from maleboxes (also referred to as ports)
+		- Each mailbox has a unique Id
+		- processes can communicate only if they share a mailbox
+		- Properties of communication link
+			- Link established only if processes share a common mailbox
+			- A link may  be associated with many processes
+			- Each pair of proceesses may share several communication links
+			- link may be unidirectional or bi-directional
+		- mailbox ownership
+			- System owned
+			- Process Owned
+				- What happens to other processes if the owner process gets deleted
+	- Ordinary Pipes (UNIX)
+		- Act as a conduit allowing two processes to communicate
+		- Issues
+			- Unidirectional
+			- In the case of two-way commucation is it half or full duplex? NOT for pipes
+			- Must there exist a relationship (parent-child) between the communicating processes? NO
+			- Can pipes be used over a network? NO
+		- Named pipes can do all
+		- int my_pipe[2]; pipe(my_pipe);
+		- Data gets put into the pipe and taken out the other end
+		- write = mypipe[1]
+		- read = mypipe[0]
+		- use ordinary read() write() system calls
+		- e.g write(mypipe[1], data, length)
+		- Cannot be accessed from outside the process that created it
+		- require parent-child relationship between communicating processes
+		- Windows calls these anonymous pipes.
+		- Empty and full pipes
+			- Reading process blocks when pipe is empty (until data becomes available)
+			- Writing process blocks when pipe is full (65536 bytes on recent Linux)
+		- Broken pipes
+			- A process wiating to read from a pipe with no writer gets an EOF (once all existed data has been read)
+			- A process writing to a pipe with no reader gets signalled
+			- Writes are guaranteed to not be interleaved if they are smaller than the PIPE_BUF constant. THis must be atleast 512 bytes and is 4096 bytes by default on Linux.
+
+## Lecture 11
+
+- Communicating via shared resources
+	- Shared resources
+		- Separate processes can alter the resource
+		- Need to check the state of the resource to either receive data or know that some event has occured
+		- Usually ned to explicitly coordinate access to the resource
+	- Files
+		- Easy to use but slow
+		- File system may provide synchronisaton help, e.g only one writer at a time
+	- Memory
+		- Fast
+		- Synchronisation is usually handled explicitly by the process
+- Shared Memory
+	- Different threads in the same process automatically share memory. How can we share memory between different heavyweight processes?
+		- define sections of shared memory
+		- attach the shared memory to the process
+		- Detach, indicate who can access it etc.
+	- Both processes need to know the name of the area of the shared memory
+	- Must make sure the memory is attached to some unused area of the process' address space
+	- Usual security checks - can this process attach to this chunk of memory
+	- What about if the processes are on separate machines
+- POSIX Shared memory
+	- To share memory between unrelated processes
+	- Process first creates shared memory segment
+		- shm_fd = shm_openname, OCREATE | O_RDWR, 0666)
+	- also used to open an existing segment
+	- Set the size of the object
+		- ftruncate(shm_fd, 4096)
+	- Use mmap() to memory-map a file pointer to the shared memory object
+	- Reading and writing to shared memory is done by using the pointer returned by mmap()
+- Signals
+	- Signals are used in UNIX systems to notify a process that a particular event has occured
+	- A signal handler is used to process signals
+		- Signal is generated by particular event
+		- An event is such as a child has finished processing or invalid memory allocation
+		- Signal is delivered to a process
+		- Signal is handled b y one of two signal handlers:
+			- default
+			- user-defined
+	- Every signal has default handler that kernel runs when handling signal
+		- User-defined signal handler can override default
+		- for single-threaded, signal delivered to process
+		- For multi threaded, depends on type of signal generated
+	- Signals are like software interrupts
+	- kill(pid, signalNumber);
+	- originally for sending events to the process because it had to stop
+	- signalNumbers for:
+		- illegal instructions
+		- memory violation
+		- floating point exceptions
+		- children finishing
+		- job control
+		- broken communicaton
+		- keyboard interrupt
+		- loss of terminal
+		- change of window size
+		- user defined
+	- But processes can catch and handle signals with signal handlers
+	- signal(signalNumber, handler);
+	- Can also ignore or do nothing if you dont ignore or set a handler, then getting a signal stops the process
+	- One signal cant be handled - 9 SIGKILL/SIGSTOP
+- Mach Ports
+	- Underneath macOS and iOS
+		- Has 2 kernels, mach kernel and BSP UNIX kernel
+	- Everything is done via ports even system calls and exception handling
+	- Only one receiver from each port but can have multiple senders (unidirectional too)
+	- Can pass the right to receive
+	- WHen a process is started, it is given send rights to a port on the bootstrap process (the service naming daemon, normally gives the bootstrap process send rights via a message)
+	- Programmers dont usually work at that level (they can use the standard UNIX communication mechanisms)
+	- Each task gets two ports at creating, kernel and notify
+	- Messages are sent and received using the mach_msg() function
+	- Ports needed for communication created via
+		- mach_port_allocate()
+	- Send and receive are flexible, for example four options if mailbox full:
+		- Wait indefinitely
+		- Wait at most n milliseconds
+		- return immediately
+		- Temporarily cache a message
+- Local Procedure Calls (Windows)
+	- Message passing centric via advanced local procedure call (ALPC) facility
+		- Only works between processes on the same system
+		- Uses ports (like mailboxes) to establish and maintain communication channels
+		- Communication works as follows
+			- The client opens a handle to the subsystems connection port object
+			- The client sends a connection request
+			- The server creates two private communication ports and returns the handle to one of them to the client
+			- The client and server use the corresponding port handle to send messages or callback and to listen for replies
+
+	## Lecture 12

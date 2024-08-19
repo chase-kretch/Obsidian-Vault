@@ -33,14 +33,14 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "316 Tutorial.md",
+                "file": "COMPSCI 340.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -117,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "316 Tutorial.md",
+                "file": "COMPSCI 316.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +134,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "316 Tutorial.md",
+                "file": "COMPSCI 316.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "316 Tutorial.md"
+                "file": "COMPSCI 316.md"
               }
             }
           }
@@ -167,22 +167,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "adc36e13b7bb53a7",
+  "active": "3ce8c5d41896f143",
   "lastOpenFiles": [
-    "COMPSCI 316.md",
-    "Compsci 335.md",
-    "316 Tutorial.md",
+    "Pasted image 20240819230232.png",
+    "Pasted image 20240819230151.png",
+    "Pasted image 20240819222849.png",
+    "Pasted image 20240819180802.png",
+    "Pasted image 20240819180624.png",
+    "Pasted image 20240819175416.png",
+    "Pasted image 20240819174146.png",
     "COMPSCI 340.md",
+    "COMPSCI 316.md",
+    "Pasted image 20240818232208.png",
+    "Pasted image 20240818230829.png",
+    "316 Tutorial.md",
+    "Compsci 335.md",
     "Pasted image 20240815002457.png",
     "Pasted image 20240815002116.png",
-    "Pasted image 20240815001950.png",
-    "Pasted image 20240815001731.png",
-    "Pasted image 20240814223328.png",
-    "Pasted image 20240814222610.png",
-    "Pasted image 20240814222536.png",
-    "Pasted image 20240814222506.png",
-    "Pasted image 20240814222355.png",
-    "Pasted image 20240814222341.png",
     "340 Tuts.md",
     "Obisidian-Notes",
     "Untitled.canvas"
