@@ -965,7 +965,63 @@ CPU Scheduling
 	- Definition of Signal() Operation
 		- signal(s){
 			- s++ }
-	- 
+	- To get a resource the thread calls wait() on the semaphore
+	- To return the resource the thread calls signal()
+	- Counting semaphore - integer value can range over an unrestricted
+	- Binary semaphore - integer value can range only between 0 and 1
+		- Same as mutex lock
+	- Can implement a counting semaphore S as a binary semaphore
+	- With semaphores we can solve various synchronization problems
+	- Rather than engaging in busy waiting, the process can suspect itself. The suspend operation places a process into a waiting queue associated with the semaphore, and the state of the process is switched to the waiting state.
+	- ![[Screenshot 2024-08-21 at 4.25.58 AM.png]]
+- **Producer/Consumer Problem**
+	- A thread producing data, and a thread consuming the data
 
+
+## Lecture 15
+
+- **Reader/Writers problem**
+	- There are a number of threads. In order to ensure the integrity of the shared data being both read from and written from we need to allow:
+		- only one writer has access to the data at a time
+		- if a writer active there must be no active reader
+		- if no writer is active there an be multiple readers
+	- We also need to make sure that no process misses out entirely
+	- Three types of solutions:
+		- Writer preferred - waiting writers go before waiting readers
+		- reader preferred - waiting readers go before waiting writers
+		- neither preferred - try to treat readers and writers fairly ( a simple queue is not good enough we want parallel readers whenever possible)
+	- Both 1 and 2 can lead to indefinite postponement
+	- See pthread_rwlock (rdlock and wrlock)
+		- which solution do they provide (writer preferred)
+- **Bad programming**
+	-  A popular problem is forgetting to unlock or signal
+	- We want an automatic (more or less) way of helping programmers lock and unlock
+		- if pthread_mutex_unlock is called by a thread which doesnt hold the lock the result is undefined
+	- C#, Java, Ruby and other languages try to avoid or minimise problems by implemented a form of monitor
+- **Monitors**
+	- You can think of a monitor as an object which only allows one thread to be executing inside of it. It has:
+		- The shared resource- it can only be accessed by the monitor
+		- public accessible procedures - they do the work
+		- a queue to get in
+		- a scheduler - which thread gets access next
+		- local state - not visible externally except via access procedures
+		- initialisation code
+		- condition variables
+		- ![[Screenshot 2024-08-21 at 4.53.43 AM.png]]
+		- Access is mutually exclusive and only one process at a time can modify the value of counter
+- **Condition Variables**
+	- But sometimes our threads have to wait for some condition
+	- A condition variable is a queue which can hold threads. We have wait and signal operations on condition variables
+	- conditionVariable.wait puts the current thread to sleep on the corresponding queue
+	- conditionVariable.signal wakes up one thread from the queue (if there are any waiting)
+	- no internal state or count is kept of how many signals and waits there have been
+	- simpler than the similar instructions
+	- a signal with nothing waiting does nothing
+	- a wait always puts a thread to sleep. So avoids busy-waiting
+- **Priority Inversion**
+	- When you have priorities on processes and a locking mechanism you can get priority inversion
+	- Lower priority processes with a lock can force higher priority processes to wait but because they are low priority they may not run very frequently
+	- Particularly important in real-time systems
+	- Solved with priority inheritance - when a higher priority process blocks waiting for a resource, the process with the resource is temporarily given the priority of the blocked process. The high priority process will not only wait during the critical section.
 
 

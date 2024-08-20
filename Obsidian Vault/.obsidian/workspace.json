@@ -21,7 +21,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMPSCI 340.md",
+                "file": "COMPSCI 316.md",
                 "mode": "source",
                 "source": false
               }
@@ -40,7 +40,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -90,7 +90,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "2f2d718969d172b7",
@@ -150,8 +151,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -168,11 +168,17 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "03e603a8c92d1d2d",
+  "active": "adc36e13b7bb53a7",
   "lastOpenFiles": [
+    "Screenshot 2024-08-21 at 4.53.43 AM.png",
+    "Screenshot 2024-08-21 at 4.25.58 AM.png",
     "Pasted image 20240821003309.png",
     "Pasted image 20240821002404.png",
+    "Compsci 335.md",
+    "340 Tuts.md",
     "COMPSCI 316.md",
+    "COMPSCI 340.md",
+    "316 Tutorial.md",
     "Pasted image 20240819230232.png",
     "Pasted image 20240819230151.png",
     "Pasted image 20240819222849.png",
@@ -180,12 +186,6 @@
     "Pasted image 20240819180624.png",
     "Pasted image 20240819175416.png",
     "Pasted image 20240819174146.png",
-    "COMPSCI 340.md",
-    "Pasted image 20240818232208.png",
-    "Pasted image 20240818230829.png",
-    "316 Tutorial.md",
-    "Compsci 335.md",
-    "340 Tuts.md",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]
