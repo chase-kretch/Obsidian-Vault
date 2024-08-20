@@ -860,5 +860,112 @@ CPU Scheduling
 			- Least slack time (LST) - the process with the least slack time has the ighest priority
 				- Slack time is the amount of time to the process deadline minus the amount of time the process still needs to complete
 
+## Lecture 14
+
+- ![[Pasted image 20240821002404.png]]
+- The problem of Concurrency
+	- The problem is simply sharing resources
+		- Several threads/processes running at the same time
+		- Using the same resources - accessing the same data
+		- Some resources can only be safely used by one thread at a time
+			- e.g readers accessing shared data while a writer is changing it or writers changing simultaneously
+	- **Race Condition** - any situation where the order of execution of threads cause different results
+	- Our programs must control the non-deterministic nature of thread scheduling
+- **Critical Sections**
+	- A piece of code in which we only want one thread to be active at a time
+	- Providing this is known as mutual exclusion
+	- We need:
+		- A way of locking threads out of critical sections (crit section should be as smallest as possible)
+		- To guarantee threads are not kept waiting forever (starvation)
+	- Starvation can be caused in different ways
+		- Deadlock
+		- indefinite postponement - priority too low or just unlucky
+	- **Solutions**
+		- We want something like this:
+			- lock
+				- critical section
+			- unlock
+	- We have a boolean variable locked which is true if the critical section is being used by a thread. Initially locked is false;
+	- Simple locked procedure:
+		- while(locked)
+			- end
+		- locked = true;
+	- locked = false;
+	- This is not atomic (if process is preempted, we could have issues)
+	- thread wasting cpu cycles checking / busy waiting
+	- thread starving (no control of which thread gets in, could get unlucky)
+	- **Petersons Algorithm**
+		- The two processes share two variables (only works with two)
+		- flag = \[false, false]\ \#both false initially\
+		- turn = 0, indicates whose turn it is to enter the critical section
+		- . flag\[i]\ = true implies that process Pi is ready to enter critical section
+		- lock: performed by thread i; j is the other thread
+		- flagi = true
+		- turn = j
+		- while (flag j && turn == j)
+		- end
+		- unlock: flag i = false;
+		- Assume load and store machine-language instructions are atomic that is, cannot be interrupted
+		- Although useful for demonstrating an algorithm, this isnt guaranteed to work on Modern architectures
+			- To improve performance, processors and or compilers may reorder operations that have no dependencies
+	- **Hardware Support**
+		- many systems provide hardware support for implementing the critical section code
+		- uniprocessors - could just disable interrupts
+			- currently running code would execute without preemption
+			- generally, too inefficient on multiprocessor systems
+				- Operating systems using this not broadly scalable
+		- We will look into two forms of hardware support:
+			- Hardware instructions
+			- Atomic variables
+		- **Test and Set**
+			- Or equivalent atomic or indivisible instructions
+			- they appear uninterruptible, once started no process can interfere
+			- testAndSet(lockVariable)
+			- returns the current value of the lockVariable
+			- then sets lockVariable to true
+			- Same as the one earlier, except while checks testAndSet
+		- **Compare and Swap**
+			- What most OS use
+			- There are 3 parameters for a CAS operation
+				- Memory location V where value has to be replaced
+				- Old value A which was read by thread last time
+				- New value B which should be written over V
+			- CAS Says - V should have the value A; if it does, put B there.
+			- Executed atomically, guarantees that the new value is calculated based on up to date information, if the value had been updated by another thread in the meantime, the write would fail
+		- **Atomic Variables**
+			- Can only be applies to a single variable, and basic data types e.g int and bool.
+		- **Mutex Lock**
+			- Hardware solutions are complicated and generally inaccessible to application programmers
+			- OS designers build software tools to solve critical section problem
+			- Simplest is Mutex Lock
+				- Boolean varialbe indicated if lock is available or not
+			- Protect a critical section by
+				- First acquire() a lock
+				- Then release() a lock
+			- Calls to acquire() and release() must be atomic
+				- Usually implemented via hardware atomic instructions such as compare-and-swap
+			- But this solution requires busy waiting
+				- Therefore also called spinlock (only this type)
+				- Use if short critical section
+			- MutexLock() will cause sleep state
+				- context switch
+				- Use for long critical sections
+- **Semaphores**
+	- Synchronisation tool that provides more sophisticated ways (than mutex locks) for processes to synchronise their activities
+	- Semaphore S - integer variable (count of h ow many a certain resource are available)
+	- Can only be accessed via two indivisible (atomic) operations
+		- wait() and signal()
+		- originally P() and V() (or POSIX wait and post)
+	- Definition of the wait() operation
+		- wait(s) {
+			- while (s < 1)
+			-  ; // busy wait
+			- s--;
+		- }
+	- Definition of Signal() Operation
+		- signal(s){
+			- s++ }
+	- 
+
 
 
