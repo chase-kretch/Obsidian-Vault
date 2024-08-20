@@ -670,4 +670,195 @@ Inter Process Communication
 			- The server creates two private communication ports and returns the handle to one of them to the client
 			- The client and server use the corresponding port handle to send messages or callback and to listen for replies
 
-	## Lecture 12
+## Lecture 12
+
+CPU Scheduling
+
+- Basic Concepts
+	- Maximum CPU itlisation obtained with multiprogramming
+	- CPU I/O Burst Cycle - Process execution consists of a cycle of CPU execution and I/O wait
+	- CPU Burst followed by I/O burst
+	- CPU burst distribution is of main concern
+- Histogram of CPU Burst Times
+	- Large number of short CPU bursts
+	- Small number of longer CPU bursts
+	- ![[Pasted image 20240819174146.png]]
+- CPU Scheduler
+	- The CPU scheduler selects from among the processes in ready queue, and allocates a CPU core to one of them
+		- Queue can be ordered in various ways
+	- CPU scheduling decisions may take place when a process
+		- Switches from running to waiting state
+		- Switches from running to ready state
+		- Switches from waiting to ready
+		- Terminates
+	- For situations 1 and 4, there is no choice on terms of scheduling - non preemptive or cooperative scheduling
+	- For situations 2 and 3 however there is a choice - preemptive scheduling
+	- Preemptive scheduling can result in race conditions
+- Preemptive and NonPreemptive Schedling
+	- Under Cooperative scheduling, once the CPu has been allocated to a process, the process keeps the CPu until it releases it either by terminating to process or switching to the waiting state
+	- Preemptive scheduling can result in race conditions when data are shared among several processes
+	- Consider the case of two processes that share data. While one process is updating the data, it is preempted so that the second process can run. The second process then tried to read the data which are in an inconsistent state
+	- Virtually all modern operating systems including Windows, MacOS, Linux and UNIX use preemptive scheduling algorithms
+- Dispatcher
+	- Dispatcher module gives control of the CPU to the process selected by the CPU scheduler. This involves
+		- Switching context
+		- Switching to user mode
+		- Jumping to the proper location in the user program to resume that program
+	- Dispatch latency
+		- Time it takes for the dispatcher to stop one process and start another running
+- Scheduling Criteria
+	- Maximise CPU utilisation
+		- Keep the CPU as busy as possible
+	- Maximise Throughput
+		- Number of processes that complete their execution per time unit
+	- Minimise Turnaround time
+		- Amount of time to execute a particular process
+	- Minimise Waiting time
+		- Amount of time a process has been waiting in the ready queue
+	- Minimise Response time
+		- Amount of time it takes from when a request was submitted until the first response is produced
+- First Come First Served (FCFS)
+	- Reduces waiting time
+	- No time wasted to determine which process should run next
+	- Little overhead as context switch only when required
+	- Non-preemptive
+	- ![[Pasted image 20240819175416.png]]
+	- Convoy Effect - short process behind long process
+		- Consider one CPU-bound and many I/O-bound processes
+		- Results in lower CPU and device utilisation
+- Round Robin (RR)
+	- pre-emptive version of FCFS
+	- Need to determine the size of the time slice or time quantum
+	- What is wrong with treating every process equally?
+		- no concept of priorities
+		- doesnt deal with different types of process, computer bound vs IO bound
+	- One way to tune this is to change the length of the time slice
+		- Less time using for context switches in long time slice
+		- short time slice has a lot of context switches
+- Shortest Job first (SJF)
+	- SJF is optimal, gives minimum average waiting time for a given set of processes
+	- Unfortunately, we dont know which process has the shortest CPU burst
+	- Use the previous CPU bursts to estimate the next
+	- Preemptive  SJF
+		- Whenever a process arrives in the ready queue, with a shorter burst time then the remaining burst time of the running process then the process is preempted
+		- Adds an arrival time value
+		- Waiting time only starts from when the process arrives
+		- ![[Pasted image 20240819180624.png]]
+- Priority Scheduling
+	- ![[Pasted image 20240819180802.png]]
+- Handling Prioities
+	- Explicit Priorities
+		- Unchanging
+		- Set before a process runs
+		- When a new process arrives, it is placed in the position in the ready queue corresponding to its priority
+		- It is possible to get indefinite block or starvation (low priority processes may never execute)
+	- Variable Priorities
+		- Priorities can vary over life of the process
+		- The system makes changes according to the process' behaviour: CPU usage, IO usage, memory requirements etc
+		- If a process is not running because it has a low priority
+			- Solution - Aging (as time progresses increase the priority of the process)
+			- or a process of a worse priority might be schedule after five processes of a better priority
+			- This prevents starvation but better priority processes will still run more often
+
+## Lecture 13
+
+- Multi-Level queue scheduling
+	- The ready queue consists of multiple queues
+	- Multilevel queue scheduler defined by the following parameters
+		- Number of queues
+		- Scheduling algorithms for each queue
+		- Method used to determine which queue a process will enter when that process needs service
+		- Scheduling among the queues
+		- A process stays on its original queue or can be moved from queue to queue
+- Multiple-Processor Scheduling
+	- Symmetric multiprocesses (SMP) is where each processor is self scheduling
+	- Two kinds
+		- All threads may be in a common ready queue
+		- Each processor may have its own private queue of threads
+	- ![[Pasted image 20240819222849.png]]
+- Real time CPU Scheduling
+	- Can present obvious challenges
+	- Soft real-time systems - critical real-time tasks have the highest priority but no guarantee as to when tasks will be scheduled
+	- Hard real-time systems - tasks must be serviced by its deadline
+	- When processes are submitted, they indicate their CPU requirements
+	- The scheduler may reject the process if the requirement cannot be met
+	- But very important processes can force other processes to relinquish their allocations
+	- Event latency - the amount of time that elapses from when an event occurs to when it is services
+	- Two types of latencies affect performance
+		- Interrupt latency - time from arrival of interrupt to start of routine that services interrupt
+		- Dispatch latency - time for schedule to take current process off CPU and switch to another (context switch)
+			- Conflict phase of dispatch latency
+				- Preemption of any process running in kernel mode
+					- Will only occur after process exits critical section
+				- Release by low-priority process of resources needed by high-priority resources
+	- For real time schedling, the job is the scheduler must support preemptive, priority -based scheduling
+		- But only guarantees soft real-time functionality
+		- No guarantee for itll meet deadline
+	- For hard real-time must also provide ability to meet deadlines
+	- (c,p,d) tuple
+		- computation time (worst case)
+		- period time
+		- deadline
+		- c <= d <= p
+- Periodic Process
+	- require CPu at constant intervals
+	- used for polling, monitoring and sampling
+	- predetermined amount of work every period
+	- Period and deadline are determined by the system requirements (often the same)
+	- Computation time is found through analysis, measurement or simulation
+	- When the computation is complete the process is blocked util the next period starts
+	- Sometimes it doesnt matter if the deadline extends period time, or the period can change depending on system load.
+- Sporadic Process
+	- event driven - some external signal or change
+	- used for fault detection, change of operating modes
+	- (c,p,d) still applies
+	- c and d have the obvious meaning
+	- p is the minimum time between events
+	- aperiodic processes
+	- p = 0
+	- events can happen at any time, even simultaneously
+	- timing can no longer be deterministic but there are ways of handling this
+		- statistical methods we design to satisfy average response times
+		- if it is rare that the system has timing faults then special cases can be included in the handling code
+		- e.g user presses a keyboard
+- Cyclic executives (CEs)
+	- handles periodic processes
+	- Sporadic processes can be converted into equivalent periodic processes or they can be ignored (if they take only a little time to handle)
+	- Pre-schedules - a feasible execution schedule is calculated before run time
+	- The cyclic executive carries out this schedule
+	- it is periodic
+	- Highly predictable - non pre-emptible
+	- Inflexible, difficult to maintain
+	- CE Schedule
+		- Major schedule - cyclic allocation of processor blocks which satisfies all deadlines and periods
+		- ![[Pasted image 20240819230151.png]]
+		- Minor cycle (or frame)  - major schedules are divided into equal size frames. Clock ticks only occur on the frame boundaries
+	- Periodic Processes 
+		- A = (1, 10, 10) B = (3, 10, 10), C = (2, 20, 20) D = (8, 20, 20)
+		- Major cycle time is 20 (smallest possible value we can use in this case). LCM of periods.
+		- Frame time - can be 10, GCD of periods
+		- ![[Pasted image 20240819230232.png]]
+	- Scheduling with Priorities
+		- Scheduling decisions are made
+			- When a process becomes ready
+			- wehn a process completes it execution
+			- when there is an interrupt
+		- Priorities can cause schedules to not be feasible
+			- A(1,2,2) better priority
+			- B(2,5,5) worse priority
+		- This is feasible (without preemption) but if the priorities are reverssed it is not
+		- Still priorities are almost always used
+			- fixed - determined before execution
+			- dynamic - change during execution
+	- Priority Allocation
+		- Fixed
+			- Rate monotonic (RM) - the shorter the period the higher the priority
+			- Least compute time (LCT) - the shorter the execution time the higher the priority (shortest job first)
+		- Dynamic
+			- Shorted completion time (SCT) - shortest job first with preemption. But this time we have good information on the execution time requirement
+			- Earliest deadline first (EDF) - the process with the closest deadline has the highest priority
+			- Least slack time (LST) - the process with the least slack time has the ighest priority
+				- Slack time is the amount of time to the process deadline minus the amount of time the process still needs to complete
+
+
+
