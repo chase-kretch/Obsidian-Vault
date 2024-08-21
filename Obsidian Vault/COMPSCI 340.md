@@ -1,3 +1,115 @@
+## Lecture 2 OS Structure
+
+- General purpose OS is a very large program
+	- Simple structure (all in one) - MS-DOS
+	- More complex - UNIX
+	- Layered - an abstraction
+	- Microkernel - Mach
+- **MS-DOS**
+	- Most functionality, least space
+	- not divided into modules
+	- had some structure, its interfaces and levels of functionality were not well separated
+	- ![[Pasted image 20240821231958.png]]
+- **Monolithic Structure**
+	- Original UNIX
+		- UNIX limited by hardware functionality, original UNIX had limited structuring
+	- Two separable parts
+		- System programs
+		- Kernel
+			- Everything below system call interface, and above physical hardware
+			- Provides file system, CPU scheduling, memory management and over OS functions; a large number of functions for one level
+	- Pros:
+		- Little overhead
+		- Fast
+	- Cons:
+		- Tight coupled, hard to implement and extend
+- Traditional UNIX
+	- ![[Pasted image 20240821232224.png]]
+- **Layered Approach**
+	- A number of layers (levels) which specific and limited functionality each on top of each other
+	- Each layer uses functions and services of lower level layers
+	- Pros / Cons
+		- Simplifies verification and debugging
+		- Hard to get correct
+		- Can be inefficient, lots of layers to go through
+	- "THE" OS
+		5) User programs
+		4) Buffering for input and output
+		3) Operator - console device driver 
+		2) Memory Management
+		1) CPU Scheduling
+		0) Hardware
+- **Microkernels**
+	- Move as much kernel into userspace
+	- Mach
+		- macOS and iOS (Darwin) partly based on 
+	- Takes place between user modes using message passing
+	- Pros:
+		- Easier to extend
+		- Easier to port OS to new architecture
+		- More reliable (less code in kernel mode)
+		- More secure
+	- Cons:
+		- Performance overhead of user space to kernel space communication
+	- ![[Pasted image 20240821232618.png]]
+- Windows NT Client/Server
+	- Hybrid
+	- Now WSL
+	- Many OS services are provided by user level servers
+	- Layered but merged for performance
+	- run code in different OS APIs
+- Modules
+	- Many modern OS implement Loadable kernel modules (LKMs)
+	- object oriented approach
+	- Each core component is separate
+	- Each talks to the others over known interfaces
+	- Each is loadable as needed within the kernel
+	- Similar to layers but more flexible.
+	- Linux Solaris etc
+- **Linux**
+	- Monolithic plus modular
+	- ![[Pasted image 20240821232859.png]]
+- **Hybrid**
+	- Most modern operating systems are not one pure model
+		- Hybrid combines multiple to address performance security and usability needs.
+		- Linux and Solaris
+		- Windows is mostly monolithic plus microkernel for different subsystem personalities, and dynamically loadable modules
+		- macOS hybrid and layered
+			- kernel extensions BSD unix kernel.
+- ![[Pasted image 20240821233237.png]]
+
+## Lecture 3 VMs
+
+- **Emulation and Virtualisation
+	- Emulation
+		- Slow, interpreter translates CPU instructions for source architecture to execute on target architecture
+	- Virtualisation
+		- OS natively compiled for CPU, running guest cpus also natively compiled
+		- Hypervisor/Virtual Machine Manager provides virtualisation services
+		- each vm is completely separate
+		- data centers with virtual servers provide huge flexibility
+		- Popek and Goldberg
+			- Fidelity - run identically except for speed
+			- Performance - most instructions must run directly on hardware
+			- Safety - (resource control) the VMM is in complete control of resources and must be safe from the VM. 
+			- only 2 types of hypervisors but technically 3
+		- Type 0 Hypervisors
+			- Hardware based solutions that provide VM creation via firmware
+				- IBM LPARs and Oracle LDOMs
+				- Guest os loads into partitions separated by hardware
+		- Type 1
+			- OS like software built to provide virtualisation. Special Purpose OS that run natively on HW
+				- VMware ESX, Joyent SmartOS and Citrix XenServer
+				- Also include general purpose OS that provide standard functions as well as VMM functions
+				- Microsoft Windows Server with HyperV and RedHat Linux with KVM
+				- Commonly found in datacenters/cloud
+				- Provide traditional OS services but also provude abilities to manage guests and drivers for guests
+		- Type 2
+			- Applications that run on standard OS but provide VMM features to guest operating systems
+				- Parallels desktop, virtualBox
+				- poorer performance
+				- modern type 2, part runs in kernel mode. Host doesnt know they are a Vm
+			
 
 ### Lecture 04 Virtual Machines 2
 
@@ -952,7 +1064,7 @@ CPU Scheduling
 				- Use for long critical sections
 - **Semaphores**
 	- Synchronisation tool that provides more sophisticated ways (than mutex locks) for processes to synchronise their activities
-	- Semaphore S - integer variable (count of h ow many a certain resource are available)
+	- Semaphore S - integer variable (count of how many a certain resource are available)
 	- Can only be accessed via two indivisible (atomic) operations
 		- wait() and signal()
 		- originally P() and V() (or POSIX wait and post)
@@ -1018,10 +1130,80 @@ CPU Scheduling
 	- simpler than the similar instructions
 	- a signal with nothing waiting does nothing
 	- a wait always puts a thread to sleep. So avoids busy-waiting
+	- Use with Monitor or MutexLock 
 - **Priority Inversion**
 	- When you have priorities on processes and a locking mechanism you can get priority inversion
 	- Lower priority processes with a lock can force higher priority processes to wait but because they are low priority they may not run very frequently
 	- Particularly important in real-time systems
+	- Occurs when a middle priority which doesnt even need critical section enters
 	- Solved with priority inheritance - when a higher priority process blocks waiting for a resource, the process with the resource is temporarily given the priority of the blocked process. The high priority process will not only wait during the critical section.
+- **Lock Free Algorithms**
+	- Another approach is to code so we dont need locks
+	- This is difficult so we use standard lock free libraries of stacks, queues, sets, etc
+	- They usually rely on compare and swap type instructions
+		- CAS(mem location, old value, new value)
+	- No matter how many threads are accessing this code they will never block
+	- Problem - **Livelock** (similar to deadlock) - an endless loop in program executions.
+		- It occurs when a process repeats itself, because it continues to receive erroneous information
+	- This is not a wait-free algorithm as it is possible a thread may stay looping indefinitely
+	- There are ways of making sure the wait is bounded. Then it is wait-free as well as lock free
+	- Many wait-free algorithms increase in memory size as the number of threads increases.
+- Rules of Concurrent Code
+	- The safest part to writing concurrent code:
+		- Dont do it if you can avoid it
+		- If you must do it dont share data across threads
+		- If you must share data across threads dont share mutable data
+		- if you must share mutable data across threads synchronize access to that data
+- Assume that threads can be interleaved at any point. Protect all access to shared data with synchronisation
+- Do not require that threads be interleaved at some point. If you need guaranteed progression between different threads you must code it explicitly using synchronisation
+- Message passing is safer because of no shared state
+- Most languages have libraries to help produce concurrent programs. Use them
+- 
+
+## Lecture 16
+
+Deadlock
+Bankers Algorithm
+
+- **Fork Scenario**
+	- Solution
+		- simultaneous wait (require left and right at the same time)
+			- can lead to starving
+		- Only allow 4 philosophers to pikcu p forks at any time
+		- even philosophers pick up their right forks first, odd philosophers pick up their left
+		- forks must be picked up lowest number first - so philosopher 4 waits for 0 first then 4(i.e right then left)
+- **Deadlock**
+	- Multiple resources + locks introduce the danger of deadlock
+	- Can only be cured by hurting some process
+	- Atleast one process must be forced to give up a resource it currently owns (or provide)
+	- Havenders Conditions for deadlock - all four conditions must hold true
+		- Circular wait - there is a circular list of processes each wanting a resource owned by another in the list
+		- Mutual exclusion - Only one thread at a time can use a resource ie no sharing
+		- No preemption - only the owner can release the resource
+		- Hold and wait - a process can hold a resource while requesting another
+	- Tricky because it might not always happen. Depends on order of requests and allocations
+	- Methods for Handling Deadlock
+		- Ignore and pretends it doesnt occur
+		- Allow the system to enter deadlock state, detect and then recover
+		- Ensure the system will never enter a deadlock state:
+			- Deadlock prevention
+			- Deadlock avoidance
+	- **Deadlock Prevention**
+		- Invalidate one of the four necessary conditions
+		- Mutual Exclusion - Make them sharable?
+			- Not required for sharable resources (e.g read-only files); must hold for non-sharable resources. Quite hard to implement
+		- Hold and Wait - must guarantee that whenever a thread requests a resource it does not hold any other resources (one resource at a time)
+			- Return a group of resources before requesting another group
+			- Allocate all resources at once can't ask for more as the process runs
+			- Low resource utilisation; starvation possible
+		- No Preemption
+			- Forcible remove - but that causes damage
+			- if a new resource is currently busy release all currently held resources and try to get them back with the new one as well
+		- Circular Wait
+			- Impose a total ordering of all resource types, and require that each thread requests resource in an increasing order of enumeration
+			- if you have one of these you can't go back and request one of those. A then B then C
+			- an alternative - allow requests from earlier in the ordering if all resources later than this are returned first
+			- Easiest to implement
+
 
 
