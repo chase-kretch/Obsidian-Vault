@@ -69,4 +69,14 @@ void * pointer
 11) C
 12) ?
 13) B
-14) 
+
+
+Practice Midsem
+
+1) D
+2) A
+3) D
+4) C
+5) A
+6) All
+7) C

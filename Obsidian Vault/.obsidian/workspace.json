@@ -21,7 +21,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMPSCI 340.md",
+                "file": "COMPSCI 316.md",
                 "mode": "source",
                 "source": false
               }
@@ -40,7 +40,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -150,8 +150,7 @@
               }
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -168,8 +167,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "3ce8c5d41896f143",
+  "active": "adc36e13b7bb53a7",
   "lastOpenFiles": [
+    "Compsci 335.md",
+    "340 Tuts.md",
+    "COMPSCI 340.md",
+    "316 Tutorial.md",
     "Pasted image 20240821233237.png",
     "Pasted image 20240821232859.png",
     "Pasted image 20240821232618.png",
@@ -181,11 +184,6 @@
     "Pasted image 20240821002404.png",
     "COMPSCI 316.md",
     "Pasted image 20240819230232.png",
-    "Pasted image 20240819230151.png",
-    "COMPSCI 340.md",
-    "316 Tutorial.md",
-    "Compsci 335.md",
-    "340 Tuts.md",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]

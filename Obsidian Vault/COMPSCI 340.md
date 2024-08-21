@@ -9,7 +9,7 @@
 	- Most functionality, least space
 	- not divided into modules
 	- had some structure, its interfaces and levels of functionality were not well separated
-	- ![[Pasted image 20240821231958.png]]
+	- ![[Pasted image 20240821231958.png|200]]
 - **Monolithic Structure**
 	- Original UNIX
 		- UNIX limited by hardware functionality, original UNIX had limited structuring
@@ -24,7 +24,8 @@
 	- Cons:
 		- Tight coupled, hard to implement and extend
 - Traditional UNIX
-	- ![[Pasted image 20240821232224.png]]
+	- ![[Pasted image 20240821232224.png|400]] 
+ |
 - **Layered Approach**
 	- A number of layers (levels) which specific and limited functionality each on top of each other
 	- Each layer uses functions and services of lower level layers
@@ -51,7 +52,7 @@
 		- More secure
 	- Cons:
 		- Performance overhead of user space to kernel space communication
-	- ![[Pasted image 20240821232618.png]]
+	- ![[Pasted image 20240821232618.png|300]]
 - Windows NT Client/Server
 	- Hybrid
 	- Now WSL
@@ -76,7 +77,7 @@
 		- Windows is mostly monolithic plus microkernel for different subsystem personalities, and dynamically loadable modules
 		- macOS hybrid and layered
 			- kernel extensions BSD unix kernel.
-- ![[Pasted image 20240821233237.png]]
+- ![[Pasted image 20240821233237.png||300]]
 
 ## Lecture 3 VMs
 
@@ -124,7 +125,8 @@
 	- Just as the physical machine has two modes, so much the VM
 		- VM needs two modes, V usermode and V Kernel mode, both run in real user mode
 	- Actions in guest that usually cause switch to kernel mode must cause switch to VKM
-	- Attempting priviledge instruction in user mode causes and error (trap)
+	- Only works priviledge instructions
+	- Attempting priviledge instruction in user mode causes an error (trap)
 	- VMM gains control, checks error, and executes operation as attempted by guest (emulate)
 	- Return control to guest in user mode
 	- User mode code in guest runs at same speed as if not a guest
@@ -181,13 +183,18 @@
 		- Java Vm, CLR/MONO
 		- Implement different architecture on top of hardware /OS
 	- Windows Subsystem for Linux 
+		- WSL V2
+			- WSL1 had 2 main problems
+				- I/O was slow, had to translate Linux to Windows calls
+				- Linux kernel wasnt there so couldnt add modules
+				- Solution was converting to running VM on top of Hyper-V
 
 ## Lecture 05 Systems Programming Language
 
 - C is the language of choice for majority of OS.
 	- High level assembler, can do low level things such as accessing and modifying memory.
 	- Also is portable (can be used on different architectures)
-	- ![[Pasted image 20240729012552.png]]
+	- ![[Pasted image 20240729012552.png|400]]
 - Accessing Registers
 	- You can use the register storage class specifier to say that a variable should be kept in the register e.g
 		- register long number = 1234
@@ -225,7 +232,7 @@
 
 Processes and Threads
 
-- Process
+- **Process
 	- The thing which represents our work to the systemm
 	- Sometimes referred to as a heavyweight process
 		- I instance of a program in execution
@@ -237,7 +244,7 @@ Processes and Threads
 	- 2, What the process is doing - streams of execution
 	- Traditin processes had resources and a single current location e.g traditional UNIX. The resource part is called a task or a job. The location part is commonly called a thread
 	- Most operating systems now provide support to keep these parts separate e.g Linux, Solaris, Windows and MacOS
-- Threads
+- **Threads
 	- Sometimes referred to as lightweight processes
 	- A sequence of instuructions being executed when there is no external intervention.
 	- Multiple threads of a process, share the prcess resources but have their own thread ID, PC, registers and stack
@@ -310,7 +317,7 @@ Processes and Threads
 		- A process could have several user and several LWPs
 		- The number of LWPs per process as adjusted automatically to keep threads running
 			- If all LWPs in process block, but there are user level threads which could run kernel creates new LWP
-		- ![[Pasted image 20240806020610.png]]
+		- ![[Pasted image 20240806020610.png|400]]
 	- Original Linux Threads (before 2.6)
 		- Thread creation is done through clone() system call.
 		- Clone() makes a new process
@@ -336,7 +343,7 @@ Processes and Threads
 		- start_routine is the name of the function which the thread runs
 		- arg is a pointer to arguments/parameters used by the function
 	- Making sure a PThread has finished
-		- ![[Pasted image 20240806172455.png]]
+		- ![[Pasted image 20240806172455.png|350]]
 	- A thread function
 		- To keep our compiler happy our thread function must be of the type:
 			  void \*(\*start_routine) (void \*)
@@ -348,9 +355,9 @@ Processes and Threads
 			- pthread_create(&thread_info, NULL, the_function, (void \*) &args)
 			- Where args is a pointer to the values we want to send to the function, and thread_info is a pthread_t.
 				- pthread_t thread_info;
-		- ![[Pasted image 20240806173300.png]]
+		- ![[Pasted image 20240806173300.png|350]]
 - Memory Layout of a C Program
-	- ![[Pasted image 20240806173422.png]]
+	- ![[Pasted image 20240806173422.png|350]]
 	- Segmentation Fault
 		- Each region has its own set of permissions. For example. the code segment is usually marked as real-only to prevent accidental modification of the program code.
 		- Situations we may get a segmentation fault:
@@ -390,10 +397,10 @@ Processes and Threads
 		- I/O status
 			- I/O devices allocated to process, list of open files
 	- Doesnt have to be kept together
-	- ![[Screenshot 2024-08-01 at 2.14.05 PM.png]]
+	- ![[Screenshot 2024-08-01 at 2.14.05 PM.png|250]]
 - UNIX PCBs
 	- The PCB is the box labelled process structure but the user structure maintains some of the information as well (only required when the process is resident)
-	- ![[Screenshot 2024-08-01 at 2.16.05 PM.png]]
+	- ![[Screenshot 2024-08-01 at 2.16.05 PM.png|350]]
 - Windows NT PCBs
 	- Information is scattered in a variety of objects
 	- Executive Process Block (EPROCESS) includes:
@@ -406,7 +413,7 @@ Processes and Threads
 			
 		- Points to threads
 		- Priotity information
-- ![[Screenshot 2024-08-01 at 2.23.03 PM.png]]
+- ![[Screenshot 2024-08-01 at 2.23.03 PM.png|350]]
 - Linked together with a doubley linked list
 - Process State
 	- As a process executes it changes state
@@ -415,7 +422,7 @@ Processes and Threads
 		- Waiting: pending for some event to occur
 		- Ready: the process is waiting to be assigned to a processor
 		- Terminated: finished executing
-		- ![[Screenshot 2024-08-01 at 2.25.22 PM.png]]
+		- ![[Screenshot 2024-08-01 at 2.25.22 PM.png|400]]
 - Process Creation
 	- Different methods of creating processes
 		- Create process system call
@@ -445,7 +452,7 @@ Processes and Threads
 				- fork() system call creates a new process
 				- exec() system call used after a fork() to replace the processes memory space with a new program
 				- Parent process calls wait() waiting for the child to terminate
-				- ![[Screenshot 2024-08-01 at 2.35.45 PM.png]]
+				- ![[Screenshot 2024-08-01 at 2.35.45 PM.png|400]]
 	- UNIX Fork() Call
 		- Parent process
 			- the one who made the call
@@ -456,8 +463,8 @@ Processes and Threads
 			- Open file information will have the count of processes using them increases by one
 			- And shared memory regions
 			- Fork returns 0 in the child process and the childs pid in the parent
-			- ![[Screenshot 2024-08-01 at 2.40.05 PM.png]]
-			- ![[Screenshot 2024-08-01 at 2.48.51 PM.png]]
+			- ![[Screenshot 2024-08-01 at 2.40.05 PM.png|350]]
+			- ![[Screenshot 2024-08-01 at 2.48.51 PM.png|350]]
 			- 6 times
 	- Exec() System call
 		- Checks to see if the file is executable
@@ -483,7 +490,7 @@ Processes and Threads
 		- doesnt copy entire address space
 		- let child work on parent address space
 		- parent process blocks until child finishes or calls exec.
-- ![[Pasted image 20240818230829.png]]
+- ![[Pasted image 20240818230829.png|350]]
 - Runnable
 	- On a single core, only one process/thread can run at a tme (not always true simultaneous multithreading (SMT) or hyperthreading)
 		- Many may however be runnable - either running or ready
@@ -514,7 +521,7 @@ Processes and Threads
 	- Context of a process is represented in the PCB (process control block)
 	- The context changes as the process executes
 	- But normally a context switch means the chance from one process/thread running to another, or from a process/thread running to handling an interrupt. Whenever the process state has to be stored and restored
-	- ![[Pasted image 20240818232208.png]]
+	- ![[Pasted image 20240818232208.png|400]]
 	- Back to running after context switch
 		- State transition
 			- Must store process properties so it can restart where it was
@@ -794,7 +801,7 @@ CPU Scheduling
 - Histogram of CPU Burst Times
 	- Large number of short CPU bursts
 	- Small number of longer CPU bursts
-	- ![[Pasted image 20240819174146.png]]
+	- ![[Pasted image 20240819174146.png|300]]
 - CPU Scheduler
 	- The CPU scheduler selects from among the processes in ready queue, and allocates a CPU core to one of them
 		- Queue can be ordered in various ways
@@ -834,7 +841,7 @@ CPU Scheduling
 	- No time wasted to determine which process should run next
 	- Little overhead as context switch only when required
 	- Non-preemptive
-	- ![[Pasted image 20240819175416.png]]
+	- ![[Pasted image 20240819175416.png|400]]
 	- Convoy Effect - short process behind long process
 		- Consider one CPU-bound and many I/O-bound processes
 		- Results in lower CPU and device utilisation
@@ -855,9 +862,9 @@ CPU Scheduling
 		- Whenever a process arrives in the ready queue, with a shorter burst time then the remaining burst time of the running process then the process is preempted
 		- Adds an arrival time value
 		- Waiting time only starts from when the process arrives
-		- ![[Pasted image 20240819180624.png]]
+		- ![[Pasted image 20240819180624.png|400]]
 - Priority Scheduling
-	- ![[Pasted image 20240819180802.png]]
+	- ![[Pasted image 20240819180802.png|400]]
 - Handling Prioities
 	- Explicit Priorities
 		- Unchanging
@@ -887,7 +894,7 @@ CPU Scheduling
 	- Two kinds
 		- All threads may be in a common ready queue
 		- Each processor may have its own private queue of threads
-	- ![[Pasted image 20240819222849.png]]
+	- ![[Pasted image 20240819222849.png|400]]
 - Real time CPU Scheduling
 	- Can present obvious challenges
 	- Soft real-time systems - critical real-time tasks have the highest priority but no guarantee as to when tasks will be scheduled
@@ -943,13 +950,13 @@ CPU Scheduling
 	- Inflexible, difficult to maintain
 	- CE Schedule
 		- Major schedule - cyclic allocation of processor blocks which satisfies all deadlines and periods
-		- ![[Pasted image 20240819230151.png]]
+		- ![[Pasted image 20240819230151.png|400]]
 		- Minor cycle (or frame)  - major schedules are divided into equal size frames. Clock ticks only occur on the frame boundaries
 	- Periodic Processes 
 		- A = (1, 10, 10) B = (3, 10, 10), C = (2, 20, 20) D = (8, 20, 20)
 		- Major cycle time is 20 (smallest possible value we can use in this case). LCM of periods.
 		- Frame time - can be 10, GCD of periods
-		- ![[Pasted image 20240819230232.png]]
+		- ![[Pasted image 20240819230232.png|300]]
 	- Scheduling with Priorities
 		- Scheduling decisions are made
 			- When a process becomes ready
@@ -1085,7 +1092,7 @@ CPU Scheduling
 	- Can implement a counting semaphore S as a binary semaphore
 	- With semaphores we can solve various synchronization problems
 	- Rather than engaging in busy waiting, the process can suspect itself. The suspend operation places a process into a waiting queue associated with the semaphore, and the state of the process is switched to the waiting state.
-	- ![[Screenshot 2024-08-21 at 4.25.58 AM.png]]
+	- ![[Screenshot 2024-08-21 at 4.25.58 AM.png|350]]
 - **Producer/Consumer Problem**
 	- A thread producing data, and a thread consuming the data
 
@@ -1119,7 +1126,8 @@ CPU Scheduling
 		- local state - not visible externally except via access procedures
 		- initialisation code
 		- condition variables
-		- ![[Screenshot 2024-08-21 at 4.53.43 AM.png]]
+		- dedicated entry point
+		- ![[Screenshot 2024-08-21 at 4.53.43 AM.png|300]]
 		- Access is mutually exclusive and only one process at a time can modify the value of counter
 - **Condition Variables**
 	- But sometimes our threads have to wait for some condition
