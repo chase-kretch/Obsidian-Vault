@@ -33,7 +33,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMPSCI 340.md",
+                "file": "COMPSCI 316.md",
                 "mode": "source",
                 "source": false
               }
@@ -117,7 +117,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMPSCI 340.md",
+                "file": "COMPSCI 316.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -134,7 +134,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMPSCI 340.md",
+                "file": "COMPSCI 316.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMPSCI 340.md"
+                "file": "COMPSCI 316.md"
               }
             }
           }
@@ -170,20 +170,20 @@
   "active": "adc36e13b7bb53a7",
   "lastOpenFiles": [
     "Compsci 335.md",
-    "340 Tuts.md",
-    "COMPSCI 340.md",
     "316 Tutorial.md",
-    "Pasted image 20240821233237.png",
-    "Pasted image 20240821232859.png",
-    "Pasted image 20240821232618.png",
-    "Pasted image 20240821232224.png",
-    "Pasted image 20240821231958.png",
-    "Screenshot 2024-08-21 at 4.53.43 AM.png",
-    "Screenshot 2024-08-21 at 4.25.58 AM.png",
-    "Pasted image 20240821003309.png",
-    "Pasted image 20240821002404.png",
+    "340 Tuts.md",
     "COMPSCI 316.md",
-    "Pasted image 20240819230232.png",
+    "COMPSCI 340.md",
+    "Pasted image 20240909023039.png",
+    "Pasted image 20240909022736.png",
+    "Pasted image 20240909022616.png",
+    "Pasted image 20240909021837.png",
+    "Pasted image 20240909021328.png",
+    "Pasted image 20240909020748.png",
+    "Pasted image 20240907182424.png",
+    "Pasted image 20240907181044.png",
+    "Pasted image 20240907180647.png",
+    "Pasted image 20240821233237.png",
     "Obisidian-Notes",
     "Untitled.canvas"
   ]

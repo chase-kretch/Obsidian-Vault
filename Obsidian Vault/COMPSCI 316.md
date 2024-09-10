@@ -782,3 +782,448 @@ Privacy Preserving Software Systems
 		- Identify important risks
 	- Use resources to identify current risks
 
+## Lecture 13
+
+- Components of a Risk Management plan
+	- A list of threats, vulnerabilities and recommendations to reduce the risks
+	- Costs associated with risks
+	- Cost associated with recommendations
+	- A cost-benefit analysis
+	- One or more rports
+		- Report all above
+		- Use risk statements to communicate a risk and resulting impact
+	- **Fishbone diagram**
+		- Finding all possible causes of a result
+		- ![[Pasted image 20240907180647.png]]
+	- **Risk = Threat x Vulnerability x Asset
+- Procedures and Schedule
+	- Review plan implementation schedule
+		- management response to recommendations
+		- To track implementation of accepted recommendations
+	- Provide Deadlines for accomplishing tasks
+		- Create plan of action and milestones (POAM)
+	- Procedures and Schedule: POAM
+		- A document used to track progress
+			- Used to assign responsibility and allow management follow-up
+				- Management is responsible for choosing the controls to implement and residual risk
+			- Living document
+		- How:
+			- For each recommended solution break into steps w/ detailed description and timeline
+			- Useful tools: milestone chart, gant chart
+		- Milestone Plan Chart
+			- Only list major milestones
+		- Gantt Chart
+			- Shows full schedule
+			- You should know from 399
+		- Gantt chart with milestone
+			- ![[Pasted image 20240907181044.png]]
+- Benefits of Risk Management Planning
+	- Mission accomplishment
+		- Principle goal of an organizations risk management process
+			- Ensure the ability to perform its mission
+	- Asset protection
+		- Protect the entire organization not just protect IT assets
+	- Competitive advantage
+		- All organizations face risks
+		- Better risk management planning provides competitveness and enhances business value
+	- Reporting
+		- Information Gathering
+		- Threat-vulnerability identification
+		- Impact analysis
+		- Risk assessment report
+	- Recommendation
+		- Identify countermeasures to reduce risk
+		- Prioritize, implement and maintain risk-reudicng measures
+		- Evaluate the risk management processes
+		- Identify effect control methods and solutions
+	- Documentation
+		- Enable well-informed decisions
+		- Commmunications with management
+			- 
+
+## Lecture 14
+
+- STRIDE: Threat model example
+	- Spoofing
+		- Threat aimed at accesisng and use of another users credentials
+		- Authentication
+	- Tampering
+		- Threat action intended to maliciously chnage or modify persistent data, such as records in a database, and the alteration of datai n transit between two computers over an open network.
+		- Integrity
+	- Repudiation
+		- Threat action aimed at performing prohibited operations in a system that lacks the ability to trace the operatoins
+		- Non-Repudiation
+	- Information disclosure
+		- Threat action intending to rtead a file that one was not greanted acess to, or to read data in transit
+		- Confidentia
+	- Denial of service
+		- Threat action attempting to deny access to valdi  users, such as making a webserver temporirily unavailable or unusable
+	- Elevation of privilege
+		- Threat action intending to gain privileged access to resources in order to gain unauthorized access to information or to compromise a system.
+- Identifying Assets and Activies
+	- Perform asset valuation
+		- Replacement or recovery value of the asset (including hardware, software, personal data, information, reputation, facilities)
+		- Based on current systems
+	- Prioritize important
+- Identifying and Analyising Countermeasures
+	- In-place controls
+		- In place in the operational system w/ documentation
+	- Planned controls
+		- specified implementation date; details in planning documents
+	- Control categories
+		- National institute of standards and Technology (NIST)
+		- Three classes: procedural, technical and physical
+- **Control Classes**
+	- Procedural
+		- Policies and procedures
+		- Security plans
+		- Insurance
+		- Awareness and training
+	- Technical
+		- Login identifier
+		- System logs
+		- Firewalls
+	- Physical
+		- Locked doors
+		- Video cameras
+		- Fire detection and suppression
+	- Evaluating controls
+		- Effectiveness (will it reduce ARO (annual rate of occurrence)? vs. cost (initial and ongoing costs evaluated)
+		- Operation/Business impact
+		- Rationale: profitability vs. survivability
+			- Why? only effective controls will be purchased
+			- Only include in RA, the ones addressing threats and vulnerabilities
+- Scope of Risk management Plan
+	- Critical business operations
+	- Customer service delivery
+	- Mission-critical business systems applications and data access
+	- Seven domains of a typical IT infrastructure
+	- Information systems security gap
+- The risk within the seven domains
+	- User domain
+	- Workstation domain
+	- LAN domain
+	- LAN-to-WAN domain
+	- Remote access domain
+	- WAN Domain
+	- System/Application Domain
+	- ![[Pasted image 20240907182424.png]]
+- Suggestions for Assessing Vulnerability
+	- Documentation review
+	- Review of system logs, audit trails, and intrusion detection outputs
+	- Vulnerability scans and other assessment tools
+	- Audits and personnel interviews
+	- Process and output analysis 
+	- System testing
+- After Evaluating Cost of Risk
+	- Conduct business impact analysis (BIA): e.g predict consequences of a disruption to the service
+	- Compute maximum acceptable outage (MAO): maximum amount of time for the unavailability of a service before it's resumption
+	- Establish service level agreement (SLA): Contracts expectation and responsibilities between service provider and customer
+	- Develop disaster recovery plan (DRP): document strategies a business follow to recover from disaster
+	- Check NIST compliance
+- Compliance issues
+	- Compliance risk: result from violating regulations (service/business dependent)
+		- CIPA (Childrens internet protection Act) requires TPM (technology protection measure): protection against weird shit (you know what)
+	- Other laws may require other controls
+- Compliance issue: Online purchase
+	- Making an online purchase
+	- Receiving funds
+- Risk mitigation: Best practices
+	- Review historical documentaton
+		- ALthough risks change, many of the threats and vulnerabilities will be the same
+	- Include both narrow and broad focus
+		- Identify specific risks and mitigation strategies and broaden the focus to include the entire organization
+	- Ensure that governing laws are identified
+		- If you don't know what laws apply, you on't be in compliance
+		- Redo RAs when a control changes
+			- If a control changes, the original RA is no longer valid
+		- Include a cost-benefit analysis (CBA)
+			- Provide justification for controls and help determine their value
+- Risk Assessment Roles
+	- RA Team: makes recommendations
+	- Senior management: makes decisions
+	- Key roles:
+	- CEO
+	- COO
+	- CFO
+	- Data owners and custodians
+	- IT management
+	- HR professionals
+	- Industry specific management
+	- Corporate legal department
+	- auditors
+
+## Lecture 16
+
+- Privacy
+	- Privacy of the person
+		- Right over the bopdy and body characteristics
+	- Privacy of Personal Behaviour
+		- Desire to freely express of any behaviour, especially sensitive matters incuding sexual preferences and habits, political ctivities and religious practices
+	- Privacy of Personal Communications
+		- Individuals desire the freedom to communicate among themselves without routing monitoring
+	- Privacy of Personal Data
+		- Ability to devide to whom, when and how much personal data disclosed
+	- Privacy of throughts and feelings
+		- Thoughts and feelings are not shared inappropirately with others
+	- Privacy of location and space
+		- Place limits on the ability to intrude into an individuals location, space
+	- Privacy of association
+		- Desire to associate with anybody without unauthorized monitoring or marginalization
+	- Indigenous Data Sovereignty
+		- Indigenous people have a right to regulate collect use and own the data that is recording on indigenous people communities, resources and lands
+		- Why does it matter?
+			- The data of other communities are also governed by external parties, struggle against colonization and discrimination
+		- Different principles
+			- CARE: Collective benefit, Authority, Responsibility, Ethics
+			- OCAP: Ownership, Control, Access, Possession
+			- Maori Data Sovereignty: Authority, Relationships, Obligations, Collective benefit, Reciprocity, Guardianship
+	- Privacy empowers safety, dignity, self-determination, opportunities and well-being of individuals
+## Lecture 17
+
+- Data Privacy
+	- I can decide:
+	- when im disclosing my personal data
+	- to whom im disclosing my personal data
+	- how much personal data im disclosing
+- Personal Data
+	- Any information which are related to an identified or identifiable natural person
+	- Directly or Indirectly
+- Digital Footprint
+	- The aggregated mass of data about you that is available online
+		- What data do you intentionally share
+		- What are hidden data attached to your intentional data sharing activities (meta data)
+		- What records are collected regarding your online activities
+		- How can other people contribute to your digital footprint
+		- What inferences can be made from putting your data together
+	- Protection Mechanisms
+		- It is important to be mindful about your data sharing practices
+		- Researches, educators, organisations try to improve awareness, knowledge, behaviour of users.
+		- What can you do?
+			- Read the privacy policies
+			- Use the privacy settings
+			- Ask to delete your data permanentlky if you no longer using a service
+			- Think about what data to share
+			- What technologies can you use
+				- VPN
+				- Anonymous web browsers and search engines
+				- Cookie blockers
+				- Incognito mode
+				- Ad blockers
+	- CAn you know what really happens to your data once they are disclosed
+		- Services might not use robust data protection mechanisms
+		- Is security simply enoguh to protect your privacy in the digital world
+		- Dark patterns in software
+	- Data is important, you cant just stop sharing it
+		- Improve services and products
+		- Research and innovation
+		- Forensic analysis
+		- Rescue missions
+	- What happens if privacy protection is not cinsdered from the offset of product development
+		- Can you envision how a business grow over time
+			- Amount of data collected
+			- Types of data collected
+			- Dependencies
+	- Privacy By Design
+		- Ann Cavoukian
+			- Proactive not reactive, preventative not remedial: plan it from the start
+			- Prtivacy as the default: default settings should be privacy protective
+			- Privacy embedded into design: priorities privacy in the product design
+			- Full functionality - positive sum, not zero-sum: should not be a tradeoff for the user
+			- End to end security - lifecycle protection: collection, process, share, store at each stage as long as the data exists
+			- Visibility and trasparency: communicate properly about the data handling practices
+			- Respect for user privacy - keep it user centric: Respect the use, be empathetic
+	- Privacy Threat modelling
+		- A systematic way to identify potential threats to personal data
+		- Helps to undertstand how vulnerabilities can be exploited
+		- Before identifying the threats
+			- Identify personal data handled by the product or service
+			- Understand the flow of the identified data
+		- After identifying the threats
+		- Impact assessment
+		- Resolve the threats
+	- LINDDUN Threat modeeling framework
+		- Linking: Data items and user actions can be linked to learn more about the person even if it does identify a person
+		- Identifying: Identity is revealed through leaks, deduction, inference
+		- Non-repudiation: A person can't deny a claim
+		- Detection: Arrive at a conclusion about a person through observation
+		- Data disclosure: Excessively collecting, sharing, processing, storing personal data
+		- Unawareness and Unintervenability: Insufficient transparency, feedback to the users or less involvement of the user
+		- Non=compliance: Violation of best practices, standards and regulations
+	- Challenges
+		- Lack of support from the higher ups
+		- Lack of tehcnical guidelines for privacy protection
+		- Lack of resources - money, time, manpower, expert support
+		- Lack of awareness and knowledge of the employees
+		- Lack of privacy mindset of the employees
+	- Solutions
+		- Training: Gives employees knowledge and skills about privacy
+		- Recruit privacy experts - ex: lawyers, chief privacy officers, researchers, developers with good privacy knowledge (privacy champions)
+		- Give incetives to privacy champions: promotions, salaryt increaments (improves the motivations to protect privacy)
+		- Enforce policies within the organisation: Govern the privacy practices of the employees
+		- Standardise privacy: Employees will release privacy is an important part in product development: example making privacy requirement gathering compulsory
+		- ![[Pasted image 20240909020748.png]]
+## Lecture 18
+- Privacy enhancing Technologies (PETS)
+	- Technologies that allow to utilize personal data while at the same time reducing the privacy risks
+
+	- The concept of PETs was first discussed in a report published by the information and privac commisionar of Ontario, Canada (1995) 
+	- From the end-user perspective: any technology that allow them to interact with digital systems in a privacy perserving manner
+	- From the organisational perspective: any technology that allow them to develop a privacy-enhancing product or a service
+	- Every PET does not guarantee aonnymisation, but they enhance the data privacy by minimizing the personal data usage
+- Anonymity
+	- The state of being unknown/undetectable
+	- Anonymisation - the technique of removing the link between the data and the data subject
+	- Changing specific Ages to a range and hiding the name
+- How do PETs acheive data protection
+	- Transform data or derive new data
+	- Hide or shield data
+	- Split datasets
+	- Psuedonymisation
+		- Converting Personal data in a way that data can no longer be linked to a person without using additional information
+		- 2 steps
+			- Replace direct identifier with an artificial identifier (always)
+			- Save actual identifiers in a separate secure table (mapping) table (depends on technique used in 1)
+		- Mapping table and pseudonimised tables are linked through the pseudonym column
+		- ![[Pasted image 20240909021328.png]]
+		- Creating the ID code could be used with a counter or a Random Number generator
+		- Or you can use cryptographic hasing
+			- Create a fixed-length output from an arbitrary-length input
+			- Cannot be reversed to original value
+			- No collisions for different inputs
+		- Or Message AUthentication Code MAC
+			- Create a fixed length output from an arbitrary length input
+			- A secret key is needed
+			- No collisions for different inputs
+		- Encryption
+			- Two way
+			- A Secret key is needed
+			- No collisions
+				- Deterministic encryption on different values
+				- Non-Deterministic encryption
+			- Not great at scaling
+			- Encryption does not require a mapping table
+	- K-Anonymity
+		- Making an individual indistinguishable from k-1 individuals in the same dataset "hiding in a crowd"
+		- It is achieved through generalisation or suppression of quasi-identifiers
+		- Termiology
+			- Quasi-identifiers - data attributes excluding PII, that in combination can unique identify a person, eg. age, zip code, gender, race
+		- Generalisation
+			- Replace to a general value (e,g age range)
+		- Supprsion
+			- Remove data values in a dataset to achieve anonymity
+				- Zip 1234 replaced by 123*
+				- 
+	- Differential Privacy
+		- Adding random noise to the data so that it is hard to tell whether an individual is participating in a dataset or not
+		- A mathematical guarantee of privacy
+			- How much privacy is lost when a dataset is queried
+	- Federated Learning
+		- Scenario: Apple using machine learnig with less privacy to train siri in identiftying only the Iphones owners voice
+		- Privacy preserving machine learning
+		- Data is not sent to a centralised location to train a machine learning model
+		- Setup
+			- There is a central server
+			- Nodes are connected to the central server e.g mobile phones
+			- Data is collected at the local nodes
+			- NOdes can connect and disconnect from the server at any time
+			- ![[Pasted image 20240909022616.png]]
+			- 
+	- Homomorphic Encryption
+		- Performing operations on encryptic data without decrypting them
+		- Addition or multiplication
+		- Types
+			- ![[Pasted image 20240909022736.png]]
+			- 
+	- Zero-Knowledge Proof
+		- Allow one party to prove the validity of a claim to another party without revealing the data bound to the clam
+		- A cryptographic technique
+		- E.g explaining whats inside a box wihtout seeing it
+		- Two roles, 
+		- Prover
+		- verifier
+		- proof size
+			- The amount of information passed b etween prover and verifier during the process
+		- There are 3 criteria to be met in ZKP
+			- completeness: An honest prover always convince the verifier
+			- Soundness
+				- A verifier can reject the false proffs shared by the dishonest prover
+			- Zero-knowledge
+				- Prover knows nothing beyond the claim made by the prover
+			- 
+	- Synthetic Data
+		- Artificially generated data that mimics the statistical properties of real data
+		- ![[Pasted image 20240909023039.png]]
+		- How to generate synthetic data
+			- Statistical Distribution
+				- Using algorithms that can generate synthetic data using the statistical properties (ex: mean, variance etc of the original data)
+			- Generative Adversarial Networks
+				- A deep learning technique that use 2 neural networks to generate new data
+					- Generator Network
+					- Discriminator Network
+			- Variational Autoencoders (VAEs)
+				- Encodied-decoded architecture
+				- VAE transforms data into a lower-level represenation (encode) then try to regenerate it back (decode)
+			- 
+
+- Linkage Attacks
+	- Where data collected from two separated studies or such and used to find the union betwen the two. Supposedly 87% of the US population can be unqiue identified by only ZIP DoB and sex.![[Pasted image 20240909021837.png]]
+- Secondary Benefits
+	- Safe collaboration with untrusted parties
+		- pseudonymisation
+	- Data can be used for secondary purposed wihtout explicit consent of the data subjects
+	- Reduced regulatory pressure
+	- Competitive advantage "Our product offers robust privacy measures than others"
+	- Mitigate the difficulties in obtaining datasets for product testing or model training pruposes
+- How do PETs achieve data protection
+	- Transofrm data or derived data
+		- Pseudonymisation
+		- K-anon
+		- Differential privacy
+		- Syntehtic data
+	- Hide or Shield Data
+		- Psuedo
+		- Homomorphic encryption
+		- Zero knowledge proof
+	- Split datasets or control access to datasets
+		- Psudonymisation
+		- Federated learning
+- Maturity
+	- Cutting edge does not mean the technology is applicable
+	- Stadards in apllication might not have been developed
+	- Some PETs can work better in theoretical settings
+	- How can we decide the maturity
+		- Standard measurement systems
+	- Quality measures
+	- Scalability
+	- Veratility
+	- Level of protection
+	- Robustness
+- Weaknesses
+	- Psudonymisaion
+		- Risk of reidentification
+	- K non
+		- Risk of reidentification
+	- Differential Privacy
+		- No consensus over the optimal privacy vs utilkity tradeoff
+		- Performance overhead
+		- Require higher computational power
+		- Limited chances of gaining insights
+	- Federated Learning
+		- Depends on architectural specifications
+		- Data quality and format at the local nodes matter
+		- Performance overhead
+	- Homomorphic Encryption
+		- Performance overhead
+		- Limited functionality
+	- Zero knowledge proof 
+		- Interactive protocols are vulnerable to side channel attacks
+		- Performance overhead
+		- Synthetic data
+		- May not present outliers in the original dataset
+		- Risk of biased data
+		- Difficulty to mimic complex data
+	- 
+	
+
+

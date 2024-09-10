@@ -38,3 +38,23 @@ Tutorial 4)
 8) Developer can reuse the code for other purposes, other people can access via his account as well
 9) Data obfuscation is attempting to make ur values harder to understand e.g using encrypted variables. This prevents an attacker from accessing variables when they have access to the source code or data. This can potentially slow down the program though. 
 10) They will lead to knowing more bugs and being more secure, yielding more satisfied clients.
+
+
+2023 S2
+
+1) C
+2) D
+3) C
+4) B
+5) D
+6) A
+7) E
+8) C
+9) D
+10) A
+11) E
+12) B
+13) E
+14) B
+15) D
+16) A
